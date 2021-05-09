@@ -1,0 +1,40 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.CategoryViewModel
+
+
+@{
+	Layout = null;
+}
+<div class="row mt-5 pt-5 justify-content-center">
+	<div class="col-md-8">
+
+
+		@using (Html.BeginForm("Delete", "Category", FormMethod.Post, new { id = "RegistrationForm" }))
+		{
+			@Html.AntiForgeryToken()
+			@Html.HiddenFor(x => x.CategoryID)
+
+			<div class="form-horizontal">
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<div class="form-group">
+					@Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					<p class="col-md mb-3 text-center mt-2 ">
+						<input type="submit" value="Delete" class="btn btn-danger mx-2 shadow-none ">
+					</p>
+				</div>
+			</div>
+
+		}
+
+	</div>
+</div>
+
+
+
+

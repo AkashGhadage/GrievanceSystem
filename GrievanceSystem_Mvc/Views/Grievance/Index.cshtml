@@ -1,0 +1,79 @@
+﻿@model IEnumerable<GrievanceSystem_Mvc.ViewModels.GrievanceViewModel>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container card my-4">
+	<div class="row p-3">
+		<div class="col-md-12">
+			<span class="h5 pt-1"><strong>All Grievances</strong></span>
+			<a href="@Url.Action("Create","Grievance") " class="btn btn-outline-dark rounded-pill float-right">
+				<span class="px-3 font-weight-bold">
+					+ Add Grievnace
+				</span>
+			</a>
+		</div>
+	</div>
+	<hr class="m-0" />
+	<div class="row  p-4 justify-content-center">
+		<div class="col-md-12">
+			<table class="table table-responsive table-hover border-0 table-bordered">
+				<caption>List of Grievances </caption>
+				<thead class="thead-light">
+					<tr>
+						@*<th>
+								@Html.DisplayNameFor(model => model.GrievanceID)
+							</th>*@
+
+						<th style="min-width:200px;">
+							@Html.DisplayNameFor(model => model.Subject)
+						</th>
+						<th style="min-width: 300px;">
+							@Html.DisplayNameFor(model => model.Description)
+						</th>
+						<th style=" width:136px;">
+							@Html.DisplayNameFor(model => model.ReportedDate)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Status)
+						</th>
+						<th class="" colspan="1" rowspan="1" style="width:169px;">Actions</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							@*<td>
+									@Html.DisplayFor(modelItem => item.GrievanceID)
+								</td>*@
+							<td>
+								@Html.DisplayFor(modelItem => item.Subject)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Description)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.ReportedDate)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Status) 
+							</td>
+							<td>
+
+								@Html.ActionLink("View", "Details", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-info" })
+								@Html.ActionLink("Update", "Edit", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-danger" })
+							</td>
+
+						</tr>
+					}
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+﻿@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container card my-4 categorycontainer">
+
+	<div class="row p-3">
+		<div class="col-md-12">
+
+			<span class="h5 pt-1"><strong>Categories</strong></span>
+
+
+			<a href="/Category/Create" class="btn btn-outline-primary float-right shadow-none categorypopup" id="addMember" title="Add Category">
+				<span class="px-3 font-weight-bold">
+					<i class="fa fa-plus"> </i> Add Categories
+				</span>
+			</a>
+
+		</div>
+	</div>
+
+	<hr class="m-0" />
+	<div class="row  p-4">
+		<div class="col-md-12">
+			<table class="table table-responsive table-sm table-striped table-bordered" id="CategoryTable" style="width:100%;">
+				<thead>
+					<tr>
+						<th style="width:100%">
+							Category Name
+						</th>
+						<th class="" style=" max-width: 175px; width: 175px; min-width: 175px;">Actions</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+
+</div>

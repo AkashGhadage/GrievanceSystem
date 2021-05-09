@@ -1,0 +1,71 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.LoginViewModel
+
+@{
+	ViewBag.Title = "Login";
+	//Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_StudentLayout.cshtml";
+
+}
+
+<div class="container ">
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-8 col-lg-6 col-xl-5">
+			<div class="card  shadow-lg mt-3">
+				<div class="card-body">
+					<div class="card-title text-center">
+						<h4>Login To</h4>
+						<p class="text-muted text-monospace "> Grievance Redressal Portal</p>
+					</div>
+					<div class="mt-4">
+						@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "", id = "LoginForm" }))
+						{
+							@Html.AntiForgeryToken()
+							<div class="form-group text-center">
+								@Html.ValidationSummary(true, null, new { @class = "text-danger" })
+							</div>
+							<div class="form-group mb-3">
+								@Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-5" })
+								<div class="col-md">
+									@Html.TextBoxFor(model => model.EmailAddress, new { placeholder = "name@domain.com", id = "Email", @class = "form-control"})
+									@Html.ValidationMessageFor(model => model.EmailAddress, "", new { id = "EmailValidation", @class = "text-danger" })
+								</div>
+							</div>
+							<div class="form-group mb-3">
+
+								@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-5" })
+								<div class="col-md">
+									@*<a class="text-decoration-none float-right" id="ShowHideLink">Show</a>*@
+									@Html.PasswordFor(model => model.Password, new { placeholder = "Password", id = "Password", @class = "form-control" })
+									@Html.ValidationMessageFor(model => model.Password, "", new { id = "PasswordValidation", @class = "text-danger" })
+								</div>
+							</div>
+
+							<div class="form-check mb-3">
+								<div class="col-md">
+									@Html.CheckBox("logincheck", new { @class = "form-check-input" })
+									@Html.Label("Keep me logged in", new { @class = "form-check-label ", @for = "logincheck" })
+								</div>
+							</div>
+							<p class="col-md mb-3">
+								<input type="submit" value="Log in" class="btn btn-login shadow-none  form-control">
+							</p>
+							<p class=" col-md text-center">
+								Don't have an account?@Html.ActionLink("Register Now", "Register", "Account")
+							</p>
+
+						}
+					</div>
+				</div>
+				<!-- eof card -->
+			</div>
+			<!-- eof col1 -->
+		</div>
+		<!-- eof row1 -->
+	</div>
+	<!-- eof container -->
+</div>
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

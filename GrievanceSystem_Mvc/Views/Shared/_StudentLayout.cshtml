@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title -Student Grievance Redressal Portal</title>
+
+	@*custom css ,Bootstrap 4 *@
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+	<!-- Font Awesome icons (free version)-->
+	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+</head>
+<body>
+
+	@* -- header -- *@
+	<div class="navbar bg-navbar navbar-expand-lg navbar-dark sticky-top  p-3" style="z-index:1;">
+		@*bg-navbar*@
+		<div class="container">
+
+			<img class="img-fluid navbar-brand brand-logo " src="~/Images/BrandLogo.png" />
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="collapsibleNavId" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav mr-auto ">
+					<li class="nav-item active">@Html.ActionLink("HOME", "Index", "Home", null, new { id = "home", @class = "nav-link " })</li>
+					<li class="nav-item">@Html.ActionLink("FAQ's", "FAQ", "Home", null, new { id = "faq", @class = "nav-link " })</li>
+					<li class="nav-item">@Html.ActionLink("CONTACT", "Contact", "Home", null, new { id = "contact", @class = "nav-link" })</li>
+
+				</ul>
+
+				@*  If logged in we hide this login button  *@
+				@if (Session["CurrentUserName"] == null)
+				{
+					<div>
+						@Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-custom shadow-none mx-1" })
+					</div>
+				}
+
+			</div>
+		</div>
+	</div>
+	@* -- body -- *@
+	<div>
+		@RenderBody()
+
+
+	</div>
+
+	@*-- Footer --*@
+	@*js files*@
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
+</body>
+</html>
+

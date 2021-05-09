@@ -1,0 +1,58 @@
+﻿@*user*@
+@{
+	ViewBag.Title = "Cell Member";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container card my-4 tablecontainer">
+
+	<div class="row p-3">
+		<div class="col-md-12">
+			<span class="h5 pt-1"><strong>Cell members</strong></span>
+			<a href="/Users/CreateCellMember" class="btn btn-outline-primary float-right shadow-none popup" id="addMember" title="Register cell member">
+				<span class="px-3 font-weight-bold">
+					<i class="fa fa-plus"> </i> Add Cell members
+				</span>
+			</a>
+
+		</div>
+	</div>
+
+	<hr class="m-0" />
+	<div class="row  p-4">
+		<div class="col-md-12">
+			<table class="table table-responsive table-sm table-striped table-bordered  " id="CellMemberTable" style="width:100%;">
+				<thead>
+					<tr>
+						<th style="width:100%">
+							Name
+						</th>
+						<th style="width:100%">
+
+							Mobile Number
+						</th>
+						<th style="width:100%">
+
+							Date Created
+						</th>
+						<th style="width:100%">
+
+							Date Modified
+						</th>
+						<th style="width:100%">
+
+							Email Address
+						</th>
+						<th style="width:100%">
+
+							Role
+						</th>
+						<th class="" style=" max-width: 175px; width: 175px; min-width: 175px;">Actions</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+
+</div>

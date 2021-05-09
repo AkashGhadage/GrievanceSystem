@@ -1,0 +1,79 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.GrievanceStatViewModel
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<section class="grievance-count-banner">
+	<div class="container">
+		<div class="row pt-5 mb-2">
+			<div class="col-md-12 text-center">
+				<h1 class="text-center ">Online Grievance Portal</h1>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-6 text-center">
+
+				<p class="lead">The only place where your complaints are precious to us! if you have any complaint please share with us.</p>
+
+				@*if logout register wiil be there*@
+				@*when student is logged in then this button must be hidden*@
+				@if (Session["CurrentUserName"] == null)
+				{
+					<p class="mt-4">
+						@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-custom shadow-none text-center m-register" })
+					</p>
+				}
+				@*if log in grievance link will be there*@
+				@if (Session["CurrentUserName"] != null)
+				{
+					<p class="mt-4">
+						@Html.ActionLink("Grievance", "Create", "Grievance", null, new { @class = "btn btn-custom-register shadow-none text-center" })
+					</p>
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="grievance-count-banner">
+
+	<div class="container mt-4">
+		<div class="row pt-2">
+			<div class="col-md-12 text-center">
+				<h2 class="text-center ">Grievances Till date</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center mt-4 ">
+			<div class="card-deck">
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<div class="g-card-header d-flex">
+							<img src="~/images/grievance-received-icon.png"
+								 class="img-fluid" style="height:50px;"><span class="gr-span">Grievances <br>Received</span>
+						</div>
+						<div class=" grievance-box-bottom text-blue"> <span id="received">22,5000</span></div>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<div class="p-card-header d-flex">
+							<img src="~/images/Grievances_Addressed.png"
+								 class="img-fluid" style="height:50px;"><span class="gr-span">Grievances <br>Redressed</span>
+						</div>
+						<div class="grievance-box-bottom text-green"> <span id="redressed">22,5000</span></div>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<div class="o-card-header d-flex">
+							<img src="~/images/grievance-inprogress.png"
+								 class="img-fluid" style="height:50px;"><span class="gr-span">Grievances <br>In Progress</span>
+						</div>
+						<div class="grievance-box-bottom text-orange"> <span id="inprogress">22,5000</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

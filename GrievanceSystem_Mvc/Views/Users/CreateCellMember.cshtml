@@ -1,0 +1,99 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.RegisterViewModel
+
+@{
+	Layout = null;
+}
+
+<div class="mt-4">
+	@using (Html.BeginForm("CreateCellMember", "Users", FormMethod.Post, new { id = "RegistrationForm" }))
+	{
+		@Html.AntiForgeryToken()
+		@Html.Hidden("Role_ID", 4)
+
+		<div class="form-row">
+			@*Email*@
+			<div class="col-md-6">
+				<div class="form-group">
+					@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+					</div>
+				</div>
+			</div>
+
+			@*MiddleName*@
+			<div class="col-md-6">
+				<div class="form-group">
+					@Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+			</div>
+
+			@* LastName*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+					</div>
+				</div>
+			</div>
+			@*EmailAddress*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { id = "Email", @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+					</div>
+				</div>
+			</div>
+
+
+
+			@*Password*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Password, "", new { id = "", @class = "text-danger" })
+					</div>
+				</div>
+
+			</div>
+
+			@*Mobile Number*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+			</div>
+			@*confirm  Password*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="col-md mb-3 text-center mt-2 ">
+			<input type="submit" value="Register" class="btn btn-info mx-2 shadow-none ">
+			<input type="reset" value="Reset" class="btn btn-secondary mx-2 shadow-none ">
+		</p>
+	}
+</div>

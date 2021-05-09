@@ -1,0 +1,71 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.UserViewModel
+@{
+	Layout = null;
+}
+
+<div class="mt-4">
+	@using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { id = "RegistrationForm" }))
+	{
+		@Html.AntiForgeryToken()
+		@Html.HiddenFor(model => model.UserId)
+		
+		<div class="form-row">
+			@*Email*@
+			<div class="col-md-6">
+				<div class="form-group">
+					@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control ",@readonly =true})
+					</div>
+				</div>
+			</div>
+
+			@*MiddleName*@
+			<div class="col-md-6">
+				<div class="form-group">
+					@Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" , @readonly = true })
+					</div>
+				</div>
+
+			</div>
+
+
+			@* Resident Country*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @readonly = true })
+					</div>
+				</div>
+			</div>
+			@*Resident City*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { id = "Email", @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @readonly = true })
+					</div>
+				</div>
+			</div>
+
+			@*Mobile Number*@
+			<div class="col-md-6 ">
+				<div class="form-group">
+					@Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control" ,@readonly=true})
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<p class="col-md mb-3 text-center mt-4 ">
+			<input type="submit" value="Delete" class="btn btn-danger shadow-none ">
+		</p>
+
+	}
+</div>

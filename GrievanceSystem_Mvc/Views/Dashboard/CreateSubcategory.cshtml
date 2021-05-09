@@ -1,0 +1,66 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.NewSubcategoryViewModel
+
+@{
+	ViewBag.Title = "CreateSubcategory";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+<div class="container card my-5 container-height">
+	<div class="row p-3">
+		<div class="col-md-12">
+
+			<span class="h3">Subcategory</span>
+			<a href="@Url.Action("Index","Grievance") " class="btn btn-outline-dark  float-right">
+				<span class="px-3 font-weight-bold">
+					All Subcategories
+				</span>
+			</a>
+
+		</div>
+	</div>
+	<hr />
+	<div class="row p-4 justify-content-center">
+		<div class="col-md-5">
+			@using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post, new { id = "" }))
+			{
+				@Html.AntiForgeryToken()
+
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.SubcategoryName, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col-md">
+						@Html.TextBoxFor(model => model.SubcategoryName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.SubcategoryName, "", new { @class = "text-danger" })
+					</div>
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.Category_ID, htmlAttributes: new { @class = "control-label col-md" })
+					<div class="col">
+						@Html.DropDownListFor(model => model.Category_ID, new List<SelectListItem>
+							{
+									new SelectListItem { Text ="University",Value="print Newspaper" ,Selected=true},
+									new SelectListItem { Text ="Institute",Value="Social Media"},
+									new SelectListItem { Text ="Department",Value="Other"},
+
+							}, "Select", new { @class = "form-control input-width" })
+						@Html.ValidationMessageFor(model => model.Category_ID, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+
+				<p class="col-md mb-3 text-center mt-4 ">
+					<input type="submit" value="Add" class="btn btn-register shadow-none">
+				</p>
+			}
+		</div>
+	</div>
+
+</div>
+
+

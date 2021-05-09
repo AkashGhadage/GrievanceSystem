@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GrievanceSystem_Mvc.ViewModels.GrievanceViewModel>
+
+@{
+	ViewBag.Title = "All Grievances";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container card my-4 grievancecontainer ">
+	<div class="row p-3">
+		<div class="col-md-12">
+			<span class="h5 pt-1"><strong>All Grievances</strong></span>
+		</div>
+	</div>
+	<hr class="m-0" />
+	<div class="row  p-4">
+		<div class="col-md-12">
+			<table class="table table-responsive table-sm table-striped table-bordered" id="grievanceTable" style="width:100%">
+				<thead>
+					<tr>
+						<th>
+							Subject
+						</th>
+						<th>
+							Description
+						</th>
+						<th>
+							Reported Date
+						</th>
+						<th>
+							Status
+						</th>
+						<th class="m-2">Actions</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.NewGrievanceViewModel
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@* TODO:while creating grievance we have to send user id also*@
+
+<div class="container card my-4">
+	<div class="row p-3">
+		<div class="col-md-12">
+			<span class="h5 pt-1"><strong>Create a Grievances</strong></span>
+		</div>
+	</div>
+	<hr class="m-0" />
+	<div class="row  p-4 justify-content-center">
+		<div class="col-md-12">
+			@using (Html.BeginForm("Create", "Grievance", FormMethod.Post))
+			{
+				@Html.AntiForgeryToken()
+				<div class="form-horizontal">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md" })
+						<div class="col">
+							@Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+							@Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md" })
+						<div class="col">
+							@Html.DropDownListFor(model => model.Category_ID, new SelectList(ViewBag.categories as System.Collections.IEnumerable, "CategoryID", "CategoryName"), "--Select Category--", new { id = "dd_Category", @class = "form-control input-width" })
+							@Html.ValidationMessageFor(model => model.Category_ID, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Subcategory, htmlAttributes: new { @class = "control-label col-md" })
+						<div class="col">
+							@Html.DropDownListFor(Model => Model.Subcategory_ID, new SelectList(Enumerable.Empty<SelectListItem>(), "SubcategoryID", "SubcategoryName"),
+						   "--Select Subcategory--", new { id = "dd_Subcat", @class = "form-control input-width" })
+
+							@Html.ValidationMessageFor(model => model.Subcategory_ID, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md" })
+						<div class="col">
+							@Html.TextAreaFor(model => model.Description, 3, 20, new { @class = "form-control" })
+							@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="Image" class="control-label col-md-10">Upload Picture/Screenshot (If any)</label>
+						<div class="col">
+							<div class="custom-file">
+								<input class="custom-file-input" id="Image" name="Image" type="file" value="">
+								<label class="custom-file-label" for="Image">Choose file</label>
+								<small class="text-danger">(Only .jpeg, .jpg, .pdf files allowed And File size between 15 KB To 256 KB)</small>
+							</div>
+						</div>
+					</div>
+
+
+
+					<p class="col-md  text-center mt-4">
+						<input type="submit" value="Submit Grievance" class="btn btn-grievance shadow-none" />
+					</p>
+
+				</div>
+			}
+
+		</div>
+	</div>
+</div>
+

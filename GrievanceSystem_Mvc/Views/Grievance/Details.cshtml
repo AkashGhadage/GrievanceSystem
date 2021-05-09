@@ -1,0 +1,112 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.GrievanceViewModel
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container  card my-4  ">
+	<div class="row p-3">
+		<div class="col-md-12">
+			<span class="h5 pt-1"><strong>Grievance Details</strong></span>
+		</div>
+	</div>
+	<hr class="m-0" />
+	<div class="row  p-4">
+		<div class=" col-md-8 card p-3 ">
+			<div class="card-title">
+				<b class="">Details</b>
+			</div>
+			<table class="table">
+				<tr class="">
+					<td><span class="h6">@Html.DisplayNameFor(model => model.Subject) </span></td>
+					<td> @Html.DisplayFor(model => model.Subject) </td>
+				</tr>
+				<tr>
+					<td><span class="h6">@Html.DisplayNameFor(model => model.Description) </span></td>
+					<td>@Html.DisplayFor(model => model.Description) </td>
+				</tr>
+				@if (String.IsNullOrEmpty(Model.ReplyMessage))
+				{
+
+					<tr>
+						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyMessage) </span></td>
+						<td>@Html.DisplayFor(model => model.ReplyMessage) </td>
+					</tr>
+
+					<tr>
+						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyDate) </span></td>
+						<td>@Html.DisplayFor(model => model.ReplyDate) </td>
+					</tr>
+					<tr>
+						<td><span class="h6">Reply By </span></td>
+						<td>for student and admin cm name is there and for cell member cell mem name + cm watch queries which is reply by him then there is reply  by you  </td>
+					</tr>
+				}
+
+				@*<tr>
+						<td><span class="h6">Reply Description </span></td>
+						<td>For students & CM & admin if reply is there then reply desc are ther otherwise NA is there and   </td>
+					</tr>
+					<tr>
+						<td><span class="h6">Reply Date </span></td>
+						<td>if date is there thn [ 23/03/21  ] oherwise [NA]</td>
+					</tr>*@
+
+
+			</table>
+
+		</div>
+		<div class="col-md-4 mt-sm-2 mt-md-0">
+			<div class="card p-3">
+				<div class="card-title">
+					<b class="">Details</b>
+				</div>
+				<table class="table table-responsive">
+					<tbody>
+						<tr class="">
+							<td class="h6">@Html.DisplayNameFor(model => model.GrievanceID)</td>
+							<td> @Html.DisplayFor(model => model.GrievanceID)</td>
+						</tr>
+						<tr>
+							<td class="h6">@Html.DisplayNameFor(model => model.ReportedDate)</td>
+							<td> @Html.DisplayFor(model => model.ReportedDate)</td>
+						</tr>
+
+						<tr>
+							<td class="h6">@Html.DisplayNameFor(model => model.Category)</td>
+							<td> @Html.DisplayFor(model => model.Category) </td>
+						</tr>
+
+						<tr>
+							<td class="h6">@Html.DisplayNameFor(model => model.Subcategory)</td>
+							<td> @Html.DisplayFor(model => model.Subcategory)</td>
+						</tr>
+						<tr>
+							<td class="h6">@Html.DisplayNameFor(model => model.Status)</td>
+							<td>  @Html.DisplayFor(model => model.Status)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<div class="row p-3">
+		@* edit button is only available for Students Admin cannot edit grievance but admin can view and reply grievance *@
+
+		@if (User.IsInRole("Student"))
+		{
+			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3">Update Grievance</a>
+
+		}
+		else if (User.IsInRole("Committee Member"))
+		{
+			<a href="@Url.Action("Reply","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3">Reply</a>
+
+		}
+
+
+	</div>
+
+</div>

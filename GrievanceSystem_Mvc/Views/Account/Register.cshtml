@@ -1,0 +1,131 @@
+﻿@model GrievanceSystem_Mvc.ViewModels.RegisterViewModel
+
+@{
+	ViewBag.Title = "Register";
+	Layout = "~/Views/Shared/_StudentLayout.cshtml";
+
+}
+<div class="container mt-4">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card shadow-lg mt-3">
+				<div class="card-body">
+					<div class="card-title ">
+						<h1><strong>Create an account</strong></h1>
+					</div>
+					<div class="mt-4">
+						@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "RegisterationForm" }))
+						{
+							@Html.AntiForgeryToken()
+							@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+							@Html.Hidden("Role_ID", 2)
+
+							<div class="form-row ">
+								@*Email*@
+								<div class="col-md-6">
+									<div class="form-group">
+										@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+
+								@*MiddleName*@
+								<div class="col-md-6">
+									<div class="form-group">
+										@Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+								</div>
+
+								@* Resident Country*@
+								<div class="col-md-6 ">
+									<div class="form-group">
+										@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+								@*Resident City*@
+								<div class="col-md-6 ">
+									<div class="form-group">
+										@Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { id = "Email", @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger", id = "EmailValidation" })
+										</div>
+									</div>
+								</div>
+
+
+
+								@*Password*@
+								<div class="col-md-6 ">
+									<div class="form-group">
+										@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.Password, "", new { id = "", @class = "text-danger" })
+										</div>
+									</div>
+
+								</div>
+
+								@*Mobile Number*@
+								<div class="col-md-6 ">
+									<div class="form-group">
+										@Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+								</div>
+								@*confirm  Password*@
+								<div class="col-md-6 ">
+									<div class="form-group">
+										@Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md" })
+										<div class="col-md">
+											@Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+											@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+
+								@*<div class="col-md-6">
+										<label class="ml-3">Signup with your social acounts </label>
+										<a href="#" class="btn btn-outline-secondary btn-google ml-3">
+											<img src="~/Images/google_PNG19635.png" style="height:30px; width:30px ;" />
+											<span class="text-dark">Google</span>
+										</a>
+									</div>*@
+								@*row end*@
+							</div>
+							<p class="col-md mb-3 text-center mt-2 ">
+								<input type="submit" value="Register" class="btn btn-register shadow-none ">
+							</p>
+							<p class=" col-md text-center">
+								Already have an account?@Html.ActionLink("Sign in", "Login", "Account")
+							</p>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
