@@ -26,9 +26,7 @@
 					<td><span class="h6">@Html.DisplayNameFor(model => model.Description) </span></td>
 					<td>@Html.DisplayFor(model => model.Description) </td>
 				</tr>
-				@if (String.IsNullOrEmpty(Model.ReplyMessage))
-				{
-
+				
 					<tr>
 						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyMessage) </span></td>
 						<td>@Html.DisplayFor(model => model.ReplyMessage) </td>
@@ -42,7 +40,7 @@
 						<td><span class="h6">Reply By </span></td>
 						<td>for student and admin cm name is there and for cell member cell mem name + cm watch queries which is reply by him then there is reply  by you  </td>
 					</tr>
-				}
+				
 
 				@*<tr>
 						<td><span class="h6">Reply Description </span></td>
