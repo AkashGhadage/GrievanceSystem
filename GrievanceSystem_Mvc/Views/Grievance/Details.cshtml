@@ -5,7 +5,7 @@
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container  card my-4  ">
+<div class="container card my-4  ">
 	<div class="row p-3">
 		<div class="col-md-12">
 			<span class="h5 pt-1"><strong>Grievance Details</strong></span>
@@ -26,8 +26,8 @@
 					<td><span class="h6">@Html.DisplayNameFor(model => model.Description) </span></td>
 					<td>@Html.DisplayFor(model => model.Description) </td>
 				</tr>
-				
-					<tr>
+
+				@*<tr>
 						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyMessage) </span></td>
 						<td>@Html.DisplayFor(model => model.ReplyMessage) </td>
 					</tr>
@@ -35,12 +35,12 @@
 					<tr>
 						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyDate) </span></td>
 						<td>@Html.DisplayFor(model => model.ReplyDate) </td>
-					</tr>
-					<tr>
+					</tr>*@
+				@*<tr>
 						<td><span class="h6">Reply By </span></td>
 						<td>for student and admin cm name is there and for cell member cell mem name + cm watch queries which is reply by him then there is reply  by you  </td>
-					</tr>
-				
+					</tr>*@
+
 
 				@*<tr>
 						<td><span class="h6">Reply Description </span></td>

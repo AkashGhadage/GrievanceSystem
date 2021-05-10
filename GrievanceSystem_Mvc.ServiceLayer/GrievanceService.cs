@@ -105,9 +105,7 @@ namespace GrievanceSystem_Mvc.ServiceLayer
                     cfg.CreateMap<Grievance, GrievanceViewModel>()
                     .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName))
                     .ForMember(d => d.Category, opt => opt.MapFrom(s => s.Category.CategoryName))
-                    .ForMember(d => d.Subcategory, opt => opt.MapFrom(s => s.Subcategory.SubcategoryName))
-                    .ForMember(d => d.ReplyMessage, opt => opt.MapFrom(s => s.Reply.ReplyMessage))
-                    .ForMember(d => d.ReportedDate, opt => opt.MapFrom(s => s.Reply.ReplyDate));
+                    .ForMember(d => d.Subcategory, opt => opt.MapFrom(s => s.Subcategory.SubcategoryName));
                     cfg.IgnoreUnmapped();
                 }
                 );
