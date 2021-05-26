@@ -34,14 +34,13 @@ namespace GrievanceSystem_Mvc.Controllers
 
             int userId = Convert.ToInt32(Session["CurrentUserID"]);
             List<GrievanceViewModel> grievanceViewModels = gs.GetGrievanceByUserId(userId);
-
             if (grievanceViewModels == null)
             {
                 ViewData["Error"] = "Record Not Found Please try again";
                 return View("Error");
             }
-            return View(grievanceViewModels);
 
+            return View(grievanceViewModels);
 
         }
 
@@ -54,7 +53,7 @@ namespace GrievanceSystem_Mvc.Controllers
 
         }
 
-       
+
         [Authorize(Roles = "Admin ,Pricipal,Committee Member")]
         public ActionResult GetAllGrievances()
         {
@@ -66,9 +65,16 @@ namespace GrievanceSystem_Mvc.Controllers
 
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id) 
         {
             GrievanceViewModel gvm = gs.GetGrievanceByGrievanceId(id);
+            if (gvm.reply == null)
+            {
+                ReplyViewModel reply = new ReplyViewModel();
+                gvm.reply = reply;
+
+            }
+
             return View(gvm);
 
 
@@ -128,8 +134,11 @@ namespace GrievanceSystem_Mvc.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(EditGrievanceViewModel GrievanceViewModel)
+        public ActionResult Edit(EditGrievanceViewModel GrievanceViewModel, FormCollection form)
         {
+
+            GrievanceViewModel.Category_ID = Convert.ToInt32(Request.Form["category.CategoryID"]);
+            GrievanceViewModel.Subcategory_ID = Convert.ToInt32(Request.Form["subcategory.SubcategoryID"]);
             int rowAffected = gs.UpdateGrievanceDetails(GrievanceViewModel);
             if (rowAffected == 0)
             {
@@ -210,6 +219,42 @@ namespace GrievanceSystem_Mvc.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddReply(FormCollection newReply)
+        {
+
+            NewReplyViewModel reply = new NewReplyViewModel()
+            {
+
+                ReplyMessage = Request.Form["reply.ReplyMessage"],
+                User_ID = Convert.ToInt32(Session["CurrentUserID"]),
+                Grievance_ID = Convert.ToInt32(Request.Form["GrievanceID"]),
+
+            };
+            int rowAffected = rs.InsertReply(reply);
+            return RedirectToAction("Details", new { id = reply.Grievance_ID });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReply(FormCollection newReply)
+        {
+
+            EditReplyViewModel reply = new EditReplyViewModel()
+            {
+
+                ReplyMessage = Request.Form["reply.ReplyMessage"],
+                User_ID = Convert.ToInt32(Session["CurrentUserID"]),
+                Grievance_ID = Convert.ToInt32(Request.Form["reply.Grievance_ID"]),
+                ReplyID = Convert.ToInt32(Request.Form["reply.ReplyID"]),
+            };
+            int rowAffected = rs.UpdateReply(reply);
+            return RedirectToAction("Details", new
+            {
+                id = reply.Grievance_ID
+            });
+        }
 
     }
 }

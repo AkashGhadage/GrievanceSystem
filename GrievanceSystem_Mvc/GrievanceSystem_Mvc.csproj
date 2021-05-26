@@ -184,9 +184,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GrievanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SubcategoryController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -403,10 +403,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Grievance\AllGrievances.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Dashboard\Users.cshtml" />
-    <Content Include="Views\Dashboard\CreateCategory.cshtml" />
-    <Content Include="Views\Dashboard\CreateSubcategory.cshtml" />
-    <Content Include="Views\Dashboard\Report.cshtml" />
     <Content Include="Views\Shared\_UserPartial.cshtml" />
     <Content Include="Views\Shared\_GrievancePartial.cshtml" />
     <Content Include="Views\Users\CellMember.cshtml" />
@@ -425,7 +421,8 @@
     <Content Include="Views\Subcategory\Edit.cshtml" />
     <Content Include="Views\Subcategory\Delete.cshtml" />
     <Content Include="Views\Grievance\View.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

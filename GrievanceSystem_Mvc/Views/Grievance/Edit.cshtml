@@ -30,20 +30,20 @@
 
 
 					<div class="form-group">
-						@Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md" })
+						@Html.LabelFor(model => model.category.CategoryName, htmlAttributes: new { @class = "control-label col-md" })
 						<div class="col">
-							@Html.DropDownListFor(model => model.Category_ID, new SelectList(ViewBag.categories as System.Collections.IEnumerable, "CategoryID", "CategoryName"), "--Select Category--", new { id = "dd_Category", @class = "form-control input-width" })
-							@Html.ValidationMessageFor(model => model.Category_ID, "", new { @class = "text-danger" })
+							@Html.DropDownListFor(model => model.category.CategoryID, new SelectList(ViewBag.categories as System.Collections.IEnumerable, "CategoryID", "CategoryName"), "--Select Category--", new { id = "dd_Category", @class = "form-control input-width" })
+							@Html.ValidationMessageFor(model => model.category.CategoryID, "", new { @class = "text-danger" })
 						</div>
 					</div>
 
 					<div class="form-group">
-						@Html.LabelFor(model => model.Subcategory, htmlAttributes: new { @class = "control-label col-md" })
+						@Html.LabelFor(model => model.subcategory.SubcategoryName, htmlAttributes: new { @class = "control-label col-md" })
 						<div class="col">
-							@Html.DropDownListFor(Model => Model.Subcategory_ID, new SelectList(ViewBag.subcategories as System.Collections.IEnumerable, "SubcategoryID", "SubcategoryName"),
+							@Html.DropDownListFor(Model => Model.subcategory.SubcategoryID, new SelectList(ViewBag.subcategories as System.Collections.IEnumerable, "SubcategoryID", "SubcategoryName"),
 						   "--Select Subcategory--", new { id = "dd_Subcat", @class = "form-control input-width" })
 
-							@Html.ValidationMessageFor(model => model.Subcategory_ID, "", new { @class = "text-danger" })
+							@Html.ValidationMessageFor(model => model.subcategory.SubcategoryID, "", new { @class = "text-danger" })
 						</div>
 					</div>
 

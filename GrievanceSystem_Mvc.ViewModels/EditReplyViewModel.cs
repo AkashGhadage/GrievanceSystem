@@ -10,14 +10,10 @@ namespace GrievanceSystem_Mvc.ViewModels
     {
         public int ReplyID { get; set; }
 
-        public DateTime ReplyDate { get; set; }
-
         public string ReplyMessage { get; set; }
 
-        public int Grievace_ID { get; set; }
+        public int Grievance_ID { get; set; }
 
         public int User_ID { get; set; }
-
-        //question details 
     }
 }

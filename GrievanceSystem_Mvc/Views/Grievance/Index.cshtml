@@ -62,11 +62,11 @@
 							<td>
 								@Html.DisplayFor(modelItem => item.Status) 
 							</td>
-							<td style="width:275px">
+							<td style="width:175px">
 
-								@Html.ActionLink("View", "Details", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-info" })
-								@Html.ActionLink("Update", "Edit", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-danger" })
-								@Html.ActionLink("View Reply", "Reply", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-danger" })
+								@Html.ActionLink("View", "Details", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-info my-1" })
+								@Html.ActionLink("Update", "Edit", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-danger my-1" })
+								@*@Html.ActionLink("View Reply", "Reply", "Grievance", new { id = item.GrievanceID }, new { @class = "btn btn-outline-danger" })*@
 							</td>
 
 						</tr>

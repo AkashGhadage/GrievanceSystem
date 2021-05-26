@@ -20,7 +20,7 @@ namespace GrievanceSystem_Mvc.Repositories
 
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
-                return connection.Execute("spInserReply", r, commandType: CommandType.StoredProcedure);
+                return connection.Execute("spInsertReply", r, commandType: CommandType.StoredProcedure);
             }
         }
 

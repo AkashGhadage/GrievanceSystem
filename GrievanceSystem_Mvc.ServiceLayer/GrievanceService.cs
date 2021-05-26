@@ -48,18 +48,19 @@ namespace GrievanceSystem_Mvc.ServiceLayer
         public List<GrievanceViewModel> GetGrievance()
         {
             List<Grievance> grievances = gr.GetGrievance();
-            //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
             var config = new MapperConfiguration(
              cfg =>
              {
-                 cfg.CreateMap<Grievance, GrievanceViewModel>();
                  cfg.CreateMap<Grievance, GrievanceViewModel>()
-                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                 cfg.IgnoreUnmapped();
+
+                 cfg.CreateMap<Category, CategoryViewModel>();
+                 cfg.CreateMap<Subcategory, SubcategoryViewModel>();
+                 cfg.CreateMap<Reply, ReplyViewModel>();
                  cfg.IgnoreUnmapped();
              }
              );
-
-
 
             IMapper mapper = config.CreateMapper();
             List<GrievanceViewModel> grievanceViewModel = mapper.Map<List<Grievance>, List<GrievanceViewModel>>(grievances);
@@ -73,15 +74,15 @@ namespace GrievanceSystem_Mvc.ServiceLayer
             if (grievances != null)
             {
                 //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
-                var config = new MapperConfiguration(
-                cfg =>
+                var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<Grievance, GrievanceViewModel>();
-                    cfg.CreateMap<Grievance, GrievanceViewModel>()
-                   .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                    cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                    cfg.CreateMap<Category, CategoryViewModel>();
+                    cfg.CreateMap<Subcategory, SubcategoryViewModel>();
+                    cfg.CreateMap<Reply, ReplyViewModel>();
+
                     cfg.IgnoreUnmapped();
-                }
-                );
+                });
 
 
                 IMapper mapper = config.CreateMapper();
@@ -98,17 +99,31 @@ namespace GrievanceSystem_Mvc.ServiceLayer
             if (grievances != null)
             {
                 //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
-                var config = new MapperConfiguration(
-                cfg =>
+                //var config = new MapperConfiguration(
+                //cfg =>
+                //{
+                //    //cfg.CreateMap<Grievance, GrievanceViewModel>();
+                //    cfg.CreateMap<Grievance, GrievanceViewModel>()
+                //    .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName))
+                //    .ForMember(d => d.Category, opt => opt.MapFrom(s => s.Category.CategoryName))
+                //    .ForMember(d => d.Subcategory, opt => opt.MapFrom(s => s.Subcategory.SubcategoryName))
+                //    .ForMember(d => d.ReplyMessage, opt => opt.MapFrom(s => s.Reply.ReplyMessage))
+                //    .ForMember(d => d.ReplyMessage, opt => opt.MapFrom(s => s.Reply.ReplyMessage))
+                //    .ForMember(d => d.ReplyDate, opt => opt.MapFrom(s => s.Reply.ReplyDate));
+                //    cfg.IgnoreUnmapped();
+                //}
+                //);
+
+                var config = new MapperConfiguration(cfg =>
                 {
-                    //cfg.CreateMap<Grievance, GrievanceViewModel>();
-                    cfg.CreateMap<Grievance, GrievanceViewModel>()
-                    .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName))
-                    .ForMember(d => d.Category, opt => opt.MapFrom(s => s.Category.CategoryName))
-                    .ForMember(d => d.Subcategory, opt => opt.MapFrom(s => s.Subcategory.SubcategoryName));
+                    cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                    cfg.CreateMap<Category, CategoryViewModel>();
+                    cfg.CreateMap<Subcategory, SubcategoryViewModel>();
+                    cfg.CreateMap<Reply, ReplyViewModel>();
+
                     cfg.IgnoreUnmapped();
-                }
-                );
+                });
+
 
 
 

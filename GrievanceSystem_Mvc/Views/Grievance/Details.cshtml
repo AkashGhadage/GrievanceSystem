@@ -17,40 +17,99 @@
 			<div class="card-title">
 				<b class="">Details</b>
 			</div>
-			<table class="table">
-				<tr class="">
+			<table class="table replycontainer">
+				<tr class="p-1">
 					<td><span class="h6">@Html.DisplayNameFor(model => model.Subject) </span></td>
-					<td> @Html.DisplayFor(model => model.Subject) </td>
+					<td class=""> @Html.DisplayFor(model => model.Subject) </td>
 				</tr>
 				<tr>
 					<td><span class="h6">@Html.DisplayNameFor(model => model.Description) </span></td>
 					<td>@Html.DisplayFor(model => model.Description) </td>
 				</tr>
+				<tr>
 
-				@*<tr>
-						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyMessage) </span></td>
-						<td>@Html.DisplayFor(model => model.ReplyMessage) </td>
-					</tr>
+					@if (User.IsInRole("Committee Member"))
+					{
+						<td><span class="h6">@Html.DisplayNameFor(model => model.reply.ReplyMessage) </span></td>
 
-					<tr>
-						<td><span class="h6">@Html.DisplayNameFor(model => model.ReplyDate) </span></td>
-						<td>@Html.DisplayFor(model => model.ReplyDate) </td>
-					</tr>*@
-				@*<tr>
-						<td><span class="h6">Reply By </span></td>
-						<td>for student and admin cm name is there and for cell member cell mem name + cm watch queries which is reply by him then there is reply  by you  </td>
-					</tr>*@
+						if (String.IsNullOrEmpty(Model.reply.ReplyMessage))
+						{
+							<td class="">
+								@using (Html.BeginForm("AddReply", "Grievance", FormMethod.Post, new { id = "RegistrationForm" }))
+								{
+									@Html.AntiForgeryToken()
+									<div class="form-horizontal">
+
+										@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+										@Html.HiddenFor(model => model.GrievanceID, new { @class = "form-control" })
 
 
-				@*<tr>
-						<td><span class="h6">Reply Description </span></td>
-						<td>For students & CM & admin if reply is there then reply desc are ther otherwise NA is there and   </td>
-					</tr>
-					<tr>
-						<td><span class="h6">Reply Date </span></td>
-						<td>if date is there thn [ 23/03/21  ] oherwise [NA]</td>
-					</tr>*@
+										<div class="form-group">
+											<div class="col-md">
+												@Html.TextAreaFor(model => model.reply.ReplyMessage, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.reply.ReplyMessage, "", new { @class = "text-danger" })
+											</div>
+										</div>
 
+										<div class="form-group">
+											<p class="col-md mr-1">
+												<input type="submit" value="Reply" class="btn btn-info mx-2 shadow-none  ">
+											</p>
+										</div>
+									</div>
+								}
+							</td>
+
+
+						}
+						else
+						{
+							<td class="">
+								<p class="Reply">@Html.DisplayFor(model => model.reply.ReplyMessage) </p>
+								<a href="#" class="btn btn-info mr-1 mt-2 shadow-none replypopup">Edit</a>
+
+
+								@using (Html.BeginForm("EditReply", "Grievance", FormMethod.Post, new { id = "EditReply", @class = "replyform hidden" }))
+								{
+									@Html.AntiForgeryToken()
+									<div class="form-horizontal">
+
+										@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+										@Html.HiddenFor(model => model.GrievanceID, new { @class = "form-control" })
+										@Html.HiddenFor(model => model.reply.ReplyID, new { @class = "form-control" })
+										@Html.HiddenFor(model => model.reply.Grievance_ID, new { @class = "form-control" })
+
+										<div class="form-group">
+											<div class="col-md">
+												@Html.TextAreaFor(model => model.reply.ReplyMessage, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.reply.ReplyMessage, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="form-group">
+											<p class="col-md mr-1">
+												<input type="submit" value="Update Reply" class="btn btn-info shadow-none   ">
+											</p>
+										</div>
+									</div>
+								}
+
+							</td>
+
+						}
+					}
+					else if (String.IsNullOrEmpty(Model.reply.ReplyMessage) && User.IsInRole("Student"))
+					{
+						<td>
+							<span class="h6">@Html.DisplayNameFor(model => model.reply.ReplyMessage) </span>
+						</td>
+						<td class="">
+							NA
+						</td>
+					}
+
+
+				</tr>
 
 			</table>
 
@@ -59,6 +118,7 @@
 			<div class="card p-3">
 				<div class="card-title">
 					<b class="">Details</b>
+
 				</div>
 				<table class="table table-responsive">
 					<tbody>
@@ -72,13 +132,13 @@
 						</tr>
 
 						<tr>
-							<td class="h6">@Html.DisplayNameFor(model => model.Category)</td>
-							<td> @Html.DisplayFor(model => model.Category) </td>
+							<td class="h6">@Html.DisplayNameFor(model => model.category.CategoryName)</td>
+							<td> @Html.DisplayFor(model => model.category.CategoryName) </td>
 						</tr>
 
 						<tr>
-							<td class="h6">@Html.DisplayNameFor(model => model.Subcategory)</td>
-							<td> @Html.DisplayFor(model => model.Subcategory)</td>
+							<td class="h6">@Html.DisplayNameFor(model => model.subcategory.SubcategoryName)</td>
+							<td> @Html.DisplayFor(model => model.subcategory.SubcategoryName)</td>
 						</tr>
 						<tr>
 							<td class="h6">@Html.DisplayNameFor(model => model.Status)</td>
@@ -96,11 +156,53 @@
 		@if (User.IsInRole("Student"))
 		{
 			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3">Update Grievance</a>
+			if (!String.IsNullOrEmpty(Model.reply.ReplyMessage))
+			{
+
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-outline-danger ml-3" data-toggle="modal" data-target="#replyModalCenter">
+					Reply Details
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="replyModalCenter" tabindex="-1" role="dialog" aria-labelledby="replyModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Reply Details</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+								<table class="table table-responsive ">
+									<tbody>
+
+										<tr>
+											<td class="border-0"><span class="h6">@Html.DisplayNameFor(m => m.reply.ReplyMessage)</span></td>
+											<td class="border-0">@Html.DisplayFor(m => m.reply.ReplyMessage)</td>
+										</tr>
+										<tr>
+											<td><span class="h6">@Html.DisplayNameFor(model => model.reply.ReplyDate) </span></td>
+											<td>@Html.DisplayFor(model => model.reply.ReplyDate) </td>
+										</tr>
+									</tbody>
+								</table>
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+
 
 		}
 		else if (User.IsInRole("Committee Member"))
 		{
-			<a href="@Url.Action("Reply","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3">Reply</a>
+			@*<a href="@Url.Action("AddReply","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3 replypopup" id="addReply" title="Reply">Reply</a>*@
 
 		}
 

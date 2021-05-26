@@ -491,6 +491,14 @@
 		OpenPopup(url, title);
 	})
 
+	//$('.replycontainer').on('click', 'a.replypopup', function (e) {
+	//	e.preventDefault();
+	//	var url = $(this).attr('href');
+	//	var title = $(this).attr('title');
+	//	OpenPopup(url, title);
+	//})
+
+
 	function OpenPopup(pageUrl, elementTitle, tblref) {
 
 		var $pageContent = $('<div />');
@@ -563,5 +571,13 @@
 
 	});
 
+	//edit button functionality on grievance detail view
+	$('.replycontainer').on('click', 'a.replypopup', function (e) {
+		e.preventDefault();
+		$(this).parent().find("form.replyform").show();
+		//$("form.replyform").show();
+		$(this).hide();
+		$(this).parent().find("p.Reply").hide();
 
+	})
 });

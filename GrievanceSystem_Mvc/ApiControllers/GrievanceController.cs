@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using GrievanceSystem_Mvc.ServiceLayer;
 using GrievanceSystem_Mvc.ViewModels;
+using Newtonsoft.Json;
 
 namespace GrievanceSystem_Mvc.Api_Controllers
 {
@@ -13,17 +14,19 @@ namespace GrievanceSystem_Mvc.Api_Controllers
     {
 
         IGrievanceService gs;
+        IReplyService rs;
 
-        public GrievanceController(IGrievanceService gs)
+        public GrievanceController(IGrievanceService gs, IReplyService rs)
         {
             this.gs = gs;
+            this.rs = rs;
         }
 
-        public int get()
+        public string getReply(int grievanceId)
         {
 
-            //gs.GetGrievanceStat(); // here we get total grievance count 
-            return 1;
+            ReplyViewModel reply= rs.GetReplyByGrievanceId(grievanceId);
+            return JsonConvert.SerializeObject(reply);
         }
 
 

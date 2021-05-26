@@ -58,5 +58,10 @@ namespace GrievanceSystem_Mvc.Controllers
         {
             return View();
         }
+
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }

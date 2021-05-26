@@ -36,7 +36,7 @@ namespace GrievanceSystem_Mvc.DomainModels
 
         public virtual Status Status { get; set; }
 
-        public Reply Reply { get; set; }
+        public virtual Reply Reply { get; set; }
 
     }
 }

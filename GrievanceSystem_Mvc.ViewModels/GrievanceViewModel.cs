@@ -22,27 +22,12 @@ namespace GrievanceSystem_Mvc.ViewModels
 
         public string Image { get; set; }
 
-
-        public string Category { get; set; }
-
-        public string Subcategory { get; set; }
-
         public string Status { get; set; }
 
+        public CategoryViewModel category { get; set; }
 
-        public string Category_ID { get; set; }
+        public SubcategoryViewModel subcategory { get; set; }
 
-        public string Subcategory_ID { get; set; }
-
-
-        [Display(Name = "Reply")]
-        public string ReplyMessage { get; set; }
-
-        [Display(Name = "Reply Date")]
-        public DateTime ReplyDate { get; set; }
-
-        //public string ReplyMessage { get; set; }
-
-        //here we need reply class details
+        public ReplyViewModel reply { get; set; }
     }
 }

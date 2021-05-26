@@ -88,17 +88,18 @@ namespace GrievanceSystem_Mvc.Repositories
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
                 string sql = "spGetGrievanceByGrievanceID";
-                List<Grievance> grievances = connection.Query<Grievance, Category, Subcategory, Status, Grievance>(sql,
-                    (grievance, category, subcategory, status) =>
+                List<Grievance> grievances = connection.Query<Grievance, Category, Subcategory, Status,Reply, Grievance>(sql,
+                    (grievance, category, subcategory, status,reply) =>
                     {
                         grievance.Category = category;
                         grievance.Subcategory = subcategory;
                         grievance.Status = status;
-                      
+                        grievance.Reply = reply;
+
                         return grievance;
                     },
                     param: new { id = grievanceId },
-                    splitOn: "CategoryID,SubcategoryID,StatusID", commandType: CommandType.StoredProcedure).ToList();
+                    splitOn: "CategoryID,SubcategoryID,StatusID,ReplyID", commandType: CommandType.StoredProcedure).ToList();
                 return grievances;
             };
         }
