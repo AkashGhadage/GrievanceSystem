@@ -88,8 +88,8 @@ namespace GrievanceSystem_Mvc.Repositories
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
                 string sql = "spGetGrievanceByGrievanceID";
-                List<Grievance> grievances = connection.Query<Grievance, Category, Subcategory, Status,Reply, Grievance>(sql,
-                    (grievance, category, subcategory, status,reply) =>
+                List<Grievance> grievances = connection.Query<Grievance, Category, Subcategory, Status, Reply, Grievance>(sql,
+                    (grievance, category, subcategory, status, reply) =>
                     {
                         grievance.Category = category;
                         grievance.Subcategory = subcategory;
@@ -119,6 +119,25 @@ namespace GrievanceSystem_Mvc.Repositories
                         return grievance;
                     },
                     param: new { UserID = userId },
+                    splitOn: "CategoryID,SubcategoryID,StatusID", commandType: CommandType.StoredProcedure).ToList();
+                return grievances;
+            }
+        }
+
+        public List<Grievance> GetGrievancesByStatusId(int statusId)
+        {
+            using (IDbConnection connection = new SqlConnection(_connectionString))
+            {
+                string sql = "spGetGrievancesByStatusId";
+                List<Grievance> grievances = connection.Query<Grievance, Category, Subcategory, Status, Grievance>(sql,
+                    (grievance, category, subcategory, status) =>
+                    {
+                        grievance.Category = category;
+                        grievance.Subcategory = subcategory;
+                        grievance.Status = status;
+                        return grievance;
+                    },
+                    param: new { StatusID = statusId },
                     splitOn: "CategoryID,SubcategoryID,StatusID", commandType: CommandType.StoredProcedure).ToList();
                 return grievances;
             }

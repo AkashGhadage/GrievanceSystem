@@ -10,6 +10,7 @@
 	@Scripts.Render("~/bundles/modernizr")
 	<!-- Font Awesome icons (free version)-->
 	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+
 </head>
 <body>
 
@@ -54,6 +55,12 @@
 
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
+	<script>
+
+		//heighlight the current active link
+		$('l.active').removeClass('active');
+		$('a[href="' + location.pathname + '"]').addClass('active');
+	</script>
 	@RenderSection("scripts", required: false)
 </body>
 </html>

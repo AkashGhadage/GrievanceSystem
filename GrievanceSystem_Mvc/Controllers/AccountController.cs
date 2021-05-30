@@ -53,7 +53,7 @@ namespace GrievanceSystem_Mvc.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Dashboard");
+                        return RedirectToAction("Dashboard", "Home");
                     }
 
                 }

@@ -36,7 +36,7 @@
 						<th style=" width:136px;">
 							@Html.DisplayNameFor(model => model.ReportedDate)
 						</th>
-						<th>
+						<th style=" width:92px;" >
 							@Html.DisplayNameFor(model => model.Status)
 						</th>
 						<th class="" colspan="1" rowspan="1" style="width:169px;">Actions</th>
@@ -60,7 +60,21 @@
 								@Html.DisplayFor(modelItem => item.ReportedDate)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Status) 
+								@if (item.Status == "Open")
+								{
+									<span class="badge badge-warning">
+										@Html.DisplayFor(modelItem => item.Status)
+									</span>
+								}
+								else
+								{
+									<span class="badge badge-info">
+										@Html.DisplayFor(modelItem => item.Status)
+
+									</span>
+
+								}
+
 							</td>
 							<td style="width:175px">
 

@@ -20,6 +20,8 @@ namespace GrievanceSystem_Mvc.ServiceLayer
         List<GrievanceViewModel> GetGrievanceByUserId(int userId); //to get grievance by  user  id 
 
         GrievanceViewModel GetGrievanceByGrievanceId(int grievanceId); // to get grievance by g id 
+        List<GrievanceViewModel> GetPendingGrievances();
+        List<GrievanceViewModel> GetResolvedGrievances();
 
         //GrievanceStatViewModel GetGrievanceStat(); // total grievances 2-> redressed grievance 3 -> pending grievance
         //GrievanceViewModel GetGrievanceByGrievanceId(int userId); //to get grievance by  grievance  id 

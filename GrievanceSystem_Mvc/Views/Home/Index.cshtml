@@ -17,14 +17,14 @@
 
 				@*if logout register wiil be there*@
 				@*when student is logged in then this button must be hidden*@
-				@if (Session["CurrentUserName"] == null)
+				@if (!User.Identity.IsAuthenticated)
 				{
 					<p class="mt-4">
 						@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-custom shadow-none text-center m-register" })
 					</p>
 				}
 				@*if log in grievance link will be there*@
-				@if (Session["CurrentUserName"] != null)
+				@if (User.Identity.IsAuthenticated)
 				{
 					<p class="mt-4">
 						@Html.ActionLink("Grievance", "Create", "Grievance", null, new { @class = "btn btn-custom-register shadow-none text-center" })

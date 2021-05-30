@@ -85,87 +85,87 @@
 		});
 	});
 
+	{
+		//Events
+		// we call function that do validation and set value to flag element
+		//email_Element.keyup(function () {
+		//	Validate_Email();
+		//});
 
-	//Events
-	// we call function that do validation and set value to flag element
-	//email_Element.keyup(function () {
-	//	Validate_Email();
-	//});
+		//Password_Element.keyup(function () {
+		//	Validate_Password();
 
-	//Password_Element.keyup(function () {
-	//	Validate_Password();
+		//});
 
-	//});
+		//// validation Functions
+		//function Validate_Email() {
+		//	var Email = email_Element.val();
+		//	var EmailPattern = new RegExp(/^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+		//	var cache = EmailPattern.test(Email);
 
-	//// validation Functions
-	//function Validate_Email() {
-	//	var Email = email_Element.val();
-	//	var EmailPattern = new RegExp(/^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-	//	var cache = EmailPattern.test(Email);
-
-	//	//var EmailPattern = new RegExp(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@(?:\S{1,63})$/); //valid 
-	//	//var cache = EmailPattern.test(Email);
-
-
-	//	if (Email == "" || Email == undefined) {
-	//		$("#EmailValidation").text("* Email Field is required");
-	//		email_Element.addClass("border border-danger");
-	//		email_Element.focus();
-
-	//	}
-	//	else if (!EmailPattern.test(Email)) {
-	//		$("#EmailValidation").text("* Please Enter valid Email Address");
-	//		email_Element.addClass("border border-danger");
-
-	//	}
-	//	else {
-	//		$("#EmailValidation").text(" ");
-	//		email_Element.removeClass("border border-danger")
-	//		Email_Flag = true;
-	//	}
-	//}
-
-	//function Validate_Password() {
-	//	var Password = Password_Element.val();
-	//	//var PasswordPattern = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/); // /^((\+)?(\d{2}[-]))?(\d{10}){1}?$/
-
-	//	if (Password == "" || Password == undefined) {
-	//		$("#PasswordValidation").text("* Password Field is required");
-	//		Password_Element.addClass("border border-danger");
-	//		Password_Element.focus();
-	//	}
-	//	//else if (!PasswordPattern.test(Password)) {
-	//	//	$("#PasswordValidation").text("* Please Enter valid Password");
-	//	//	Password_Element.addClass("border border-danger");
-
-	//	//}
-	//	else {
-	//		$("#PasswordValidation").text(" ");
-	//		Password_Element.removeClass("border border-danger")
-	//		Password_Flag = true;
-	//	}
-	//}
-	////form submit event
-	//FormElement.submit(
-	//	function () {
-	//		Email_Flag = Password_Flag = false;
+		//	//var EmailPattern = new RegExp(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@(?:\S{1,63})$/); //valid 
+		//	//var cache = EmailPattern.test(Email);
 
 
-	//		Validate_Password();
-	//		Validate_Email();
+		//	if (Email == "" || Email == undefined) {
+		//		$("#EmailValidation").text("* Email Field is required");
+		//		email_Element.addClass("border border-danger");
+		//		email_Element.focus();
 
-	//		if (Email_Flag == true && Password_Flag == true) {
-	//			return true;
-	//		}
-	//		else {
-	//			return false;
-	//		}
-	//	}
-	//);
+		//	}
+		//	else if (!EmailPattern.test(Email)) {
+		//		$("#EmailValidation").text("* Please Enter valid Email Address");
+		//		email_Element.addClass("border border-danger");
 
-	//heighlight the current active link
-	$('li.active').removeClass('active');
-	$('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+		//	}
+		//	else {
+		//		$("#EmailValidation").text(" ");
+		//		email_Element.removeClass("border border-danger")
+		//		Email_Flag = true;
+		//	}
+		//}
+
+		//function Validate_Password() {
+		//	var Password = Password_Element.val();
+		//	//var PasswordPattern = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/); // /^((\+)?(\d{2}[-]))?(\d{10}){1}?$/
+
+		//	if (Password == "" || Password == undefined) {
+		//		$("#PasswordValidation").text("* Password Field is required");
+		//		Password_Element.addClass("border border-danger");
+		//		Password_Element.focus();
+		//	}
+		//	//else if (!PasswordPattern.test(Password)) {
+		//	//	$("#PasswordValidation").text("* Please Enter valid Password");
+		//	//	Password_Element.addClass("border border-danger");
+
+		//	//}
+		//	else {
+		//		$("#PasswordValidation").text(" ");
+		//		Password_Element.removeClass("border border-danger")
+		//		Password_Flag = true;
+		//	}
+		//}
+		////form submit event
+		//FormElement.submit(
+		//	function () {
+		//		Email_Flag = Password_Flag = false;
+
+
+		//		Validate_Password();
+		//		Validate_Email();
+
+		//		if (Email_Flag == true && Password_Flag == true) {
+		//			return true;
+		//		}
+		//		else {
+		//			return false;
+		//		}
+		//	}
+		//);
+
+	}
+
+
 
 	//toogle sidebar 
 	$("#menu-toggle").click(function (e) {
@@ -399,6 +399,7 @@
 
 	var gTable = $('#grievanceTable').DataTable(
 		{
+
 			"ajax":
 			{
 				"url": "/Grievance/GetAllGrievances",
@@ -407,6 +408,13 @@
 			},
 			"columns":
 				[
+
+					{
+						"data": "S.No",
+						"render": function (data, type, row, meta) {
+							return meta.row + meta.settings._iDisplayStart + 1;
+						}
+					},
 					{ "data": "Subject" },
 					{ "data": "Description" },
 					{
@@ -423,7 +431,21 @@
 
 						}
 					},
-					{ "data": "Status" },
+					{
+						"data": "Status",
+						"searchable": false,
+						"sortable": true,
+						"render": function (data, type, full, meta) {
+							if (data == "Open") {
+								return '<span class="badge badge-warning">' + data + '</span>'
+
+							} else {
+								return '<span class="badge badge-info">' + data + '</span>'
+
+							}
+
+						}
+					},
 					{
 						"title": "Actions",
 						"data": "GrievanceID",
@@ -445,6 +467,138 @@
 
 		}
 	);
+
+
+
+	var pgTable = $('#PendinggrievanceTable').DataTable(
+		{
+			"ajax":
+			{
+				"url": "/Grievance/GetPendingGrievances",
+				"type": "GET",
+				"dataType": "json"
+			},
+			"columns":
+				[
+					{
+						"data": "S.No",
+						"render": function (data, type, row, meta) {
+							return meta.row + meta.settings._iDisplayStart + 1;
+						}
+					},
+					{ "data": "Subject" },
+					{ "data": "Description" },
+					{
+						"data": "ReportedDate",
+						"render": function (jsonDate) {
+							if (jsonDate == "/Date(-62135596800000)/") {
+								return "N/A";
+							}
+							else {
+								var date = new Date(parseInt(jsonDate.substr(6)));
+								var month = date.getMonth() + 1;
+								return date.getDate() + "/" + month + "/" + date.getFullYear();
+							}
+
+						}
+					},
+					{
+						"data": "Status",
+						"searchable": false,
+						"sortable": false,
+						"render": function (data, type, full, meta) {
+							return '<span class="badge badge-warning">' + data + '</span>'
+						}
+					},
+					{
+						"title": "Actions",
+						"data": "GrievanceID",
+						"searchable": false,
+						"sortable": false,
+						"render": function (data, type, full, meta) {
+							return '<a href="/Grievance/Details?id=' + data + '" class="btn btn-outline-info"  title="Grievance Details">View</a>'
+							// +'<a href="/Grievance/Delete/' + data + '" class="btn btn-danger my-2 mx-2 grievancepopup"  title="Delete Grievance">Delete</a>';
+						}
+
+					}
+
+				],
+			"language":
+			{
+				"emptyTable": "Pending Grievance Not Found"
+
+			}
+
+		}
+	);
+
+
+	var rgTable = $('#ResolvedgrievanceTable').DataTable(
+		{
+			"ajax":
+			{
+				"url": "/Grievance/GetResolvedGrievances",
+				"type": "GET",
+				"dataType": "json"
+			},
+			"columns":
+				[
+					{
+						"data": "S.No",
+						"render": function (data, type, row, meta) {
+							return meta.row + meta.settings._iDisplayStart + 1;
+						}
+					},
+					{ "data": "Subject" },
+					{ "data": "Description" },
+					{
+						"data": "ReportedDate",
+						"render": function (jsonDate) {
+							if (jsonDate == "/Date(-62135596800000)/") {
+								return "N/A";
+							}
+							else {
+								var date = new Date(parseInt(jsonDate.substr(6)));
+								var month = date.getMonth() + 1;
+								return date.getDate() + "/" + month + "/" + date.getFullYear();
+							}
+
+						}
+					},
+					{
+						"data": "Status",
+						"searchable": false,
+						"sortable": false,
+						"render": function (data, type, full, meta) {
+							return '<span class="badge badge-info">' + data + '</span>'
+						}
+					},
+					{
+						"title": "Actions",
+						"data": "GrievanceID",
+						"searchable": false,
+						"sortable": false,
+						"render": function (data, type, full, meta) {
+							return '<a href="/Grievance/Details?id=' + data + '" class="btn btn-outline-info"  title="Grievance Details">View</a>'
+							// +'<a href="/Grievance/Delete/' + data + '" class="btn btn-danger my-2 mx-2 grievancepopup"  title="Delete Grievance">Delete</a>';
+						}
+
+					}
+
+				],
+			"language":
+			{
+				"emptyTable": "No data found"
+
+			}
+
+		}
+	);
+
+
+
+
+
 
 	var dd_c = $("#ddc_Category");
 

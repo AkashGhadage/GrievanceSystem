@@ -134,5 +134,57 @@ namespace GrievanceSystem_Mvc.ServiceLayer
             }
             return grievanceViewModel;
         }
+
+        public List<GrievanceViewModel> GetPendingGrievances()
+        {
+            int statusId = 1;
+            List<Grievance> grievances = gr.GetGrievancesByStatusId(statusId);
+            List<GrievanceViewModel> grievanceViewModel = null;
+            if (grievances != null)
+            {
+                //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                    cfg.CreateMap<Category, CategoryViewModel>();
+                    cfg.CreateMap<Subcategory, SubcategoryViewModel>();
+                    cfg.CreateMap<Reply, ReplyViewModel>();
+
+                    cfg.IgnoreUnmapped();
+                });
+
+
+                IMapper mapper = config.CreateMapper();
+                grievanceViewModel = mapper.Map<List<Grievance>, List<GrievanceViewModel>>(grievances);
+
+            }
+            return grievanceViewModel;
+        }
+
+        public List<GrievanceViewModel> GetResolvedGrievances()
+        {
+            int statusId = 2;
+            List<Grievance> grievances = gr.GetGrievancesByStatusId(statusId);
+            List<GrievanceViewModel> grievanceViewModel = null;
+            if (grievances != null)
+            {
+                //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
+                    cfg.CreateMap<Category, CategoryViewModel>();
+                    cfg.CreateMap<Subcategory, SubcategoryViewModel>();
+                    cfg.CreateMap<Reply, ReplyViewModel>();
+
+                    cfg.IgnoreUnmapped();
+                });
+
+
+                IMapper mapper = config.CreateMapper();
+                grievanceViewModel = mapper.Map<List<Grievance>, List<GrievanceViewModel>>(grievances);
+
+            }
+            return grievanceViewModel;
+        }
     }
 }

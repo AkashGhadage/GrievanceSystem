@@ -122,10 +122,10 @@
 				</div>
 				<table class="table table-responsive">
 					<tbody>
-						<tr class="">
-							<td class="h6">@Html.DisplayNameFor(model => model.GrievanceID)</td>
-							<td> @Html.DisplayFor(model => model.GrievanceID)</td>
-						</tr>
+						@*<tr class="">
+								<td class="h6">@Html.DisplayNameFor(model => model.GrievanceID)</td>
+								<td> @Html.DisplayFor(model => model.GrievanceID)</td>
+							</tr>*@
 						<tr>
 							<td class="h6">@Html.DisplayNameFor(model => model.ReportedDate)</td>
 							<td> @Html.DisplayFor(model => model.ReportedDate)</td>
@@ -155,12 +155,12 @@
 
 		@if (User.IsInRole("Student"))
 		{
-			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3">Update Grievance</a>
+			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-dark ml-3">Update Grievance</a>
 			if (!String.IsNullOrEmpty(Model.reply.ReplyMessage))
 			{
 
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-outline-danger ml-3" data-toggle="modal" data-target="#replyModalCenter">
+				<button type="button" class="btn btn-info ml-3" data-toggle="modal" data-target="#replyModalCenter">
 					Reply Details
 				</button>
 
@@ -200,12 +200,6 @@
 
 
 		}
-		else if (User.IsInRole("Committee Member"))
-		{
-			@*<a href="@Url.Action("AddReply","Grievance",new { id= Model.GrievanceID}) " class="btn btn-outline-danger ml-3 replypopup" id="addReply" title="Reply">Reply</a>*@
-
-		}
-
 
 	</div>
 

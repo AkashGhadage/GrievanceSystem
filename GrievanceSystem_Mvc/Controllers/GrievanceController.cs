@@ -65,7 +65,49 @@ namespace GrievanceSystem_Mvc.Controllers
 
         }
 
-        public ActionResult Details(int id) 
+        [HttpGet]
+        [Authorize(Roles = "Admin ,Pricipal,Committee Member")]
+        public ActionResult PendingGrievances()
+        {
+            //TODO: Work on views buttons and all
+            return View();
+
+        }
+
+
+        [Authorize(Roles = "Admin ,Pricipal,Committee Member")]
+        public ActionResult GetPendingGrievances()
+        {
+            //TODO: Work on views buttons and all
+
+            List<GrievanceViewModel> grievances = gs.GetPendingGrievances();
+
+            return Json(new { data = grievances }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin ,Pricipal,Committee Member")]
+        public ActionResult ResolvedGrievances()
+        {
+            //TODO: Work on views buttons and all
+            return View();
+
+        }
+
+
+        [Authorize(Roles = "Admin ,Pricipal,Committee Member")]
+        public ActionResult GetResolvedGrievances()
+        {
+            //TODO: Work on views buttons and all
+
+            List<GrievanceViewModel> grievances = gs.GetResolvedGrievances();
+
+            return Json(new { data = grievances }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult Details(int id)
         {
             GrievanceViewModel gvm = gs.GetGrievanceByGrievanceId(id);
             if (gvm.reply == null)

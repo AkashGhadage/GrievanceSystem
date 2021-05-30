@@ -423,6 +423,8 @@
     <Content Include="Views\Grievance\View.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Grievance\PendingGrievances.cshtml" />
+    <Content Include="Views\Grievance\ResolvedGrievances.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,22 +15,40 @@
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center">
 
-				<p class="lead">The only place where your complaints are precious to us! if you have any complaint please share with us.</p>
 
 				@*if logout register wiil be there*@
 				@*when student is logged in then this button must be hidden*@
 				@if (Session["CurrentUserName"] == null)
 				{
+
 					<p class="mt-4">
 						@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-custom shadow-none text-center m-register" })
 					</p>
 				}
 				@*if log in grievance link will be there*@
-				@if (Session["CurrentUserName"] != null)
+				@if (User.IsInRole("Student"))
 				{
+					<p class="lead">The only place where your complaints are precious to us! if you have any complaint please share with us.</p>
+
 					<p class="mt-4">
 						@Html.ActionLink("Grievance", "Create", "Grievance", null, new { @class = "btn btn-custom-register shadow-none text-center" })
 					</p>
+				}
+				else if (User.IsInRole("Committee Member") || User.IsInRole("Pricipal"))
+				{
+					<p class="lead">The only place where your complaints are precious to us! if you have any complaint please share with us.</p>
+
+					<p class="mt-4">
+						@Html.ActionLink("Grievances", "AllGrievances", "Grievance", null, new { @class = "btn btn-custom-register shadow-none text-center" })
+					</p>
+
+				}
+				else if (User.IsInRole("Admin"))
+				{
+					<p class="mt-4">
+						@Html.ActionLink("Admin", "AllGrievances", "Grievance", null, new { @class = "btn btn-custom-register shadow-none text-center" })
+					</p>
+
 				}
 			</div>
 		</div>

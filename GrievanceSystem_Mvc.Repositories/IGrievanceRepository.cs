@@ -17,8 +17,7 @@ namespace GrievanceSystem_Mvc.Repositories
         List<Grievance> GetGrievanceByUserId(int userId); //to get grievance by  user  id 
       
         List<Grievance> GetGrievanceByGrievanceId(int grievanceId); //to get grievance by  grievance  id 
-
-
-
+       
+        List<Grievance> GetGrievancesByStatusId(int statusId);
     }
 }
