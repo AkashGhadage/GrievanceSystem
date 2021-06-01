@@ -1,8 +1,10 @@
 ﻿@model GrievanceSystem_Mvc.ViewModels.GrievanceViewModel
+@*@using System.Web.Mvc.AssetVersioning;*@
 
 @{
 	ViewBag.Title = "Details";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	var imgPath = "~/File/" + (Model.file ?? "");
 }
 
 <div class="container card my-4  ">
@@ -25,6 +27,21 @@
 				<tr>
 					<td><span class="h6">@Html.DisplayNameFor(model => model.Description) </span></td>
 					<td>@Html.DisplayFor(model => model.Description) </td>
+				</tr>
+				<tr>
+					<td><span class="h6">@Html.DisplayNameFor(model => model.file) </span></td>
+					@if (String.IsNullOrEmpty(Model.file))
+					{
+						<td>
+							<span>NA</span>
+						</td>
+					}
+					else
+					{
+						<td>
+							<a href="@Url.Content(imgPath)" class=" btn btn-outline-dark details FilePopup" title="File Details">View File</a>
+						</td>
+					}
 				</tr>
 				<tr>
 
@@ -88,7 +105,7 @@
 
 										<div class="form-group">
 											<p class="col-md mr-1">
-												<input type="submit" value="Update Reply" class="btn btn-info shadow-none   ">
+												<input type="submit" value="Update Reply" class="btn btn-info shadow-none">
 											</p>
 										</div>
 									</div>
@@ -114,6 +131,7 @@
 			</table>
 
 		</div>
+		<div id="dialogNew" class="" style="display:none" title=""></div>
 		<div class="col-md-4 mt-sm-2 mt-md-0">
 			<div class="card p-3">
 				<div class="card-title">
@@ -155,7 +173,7 @@
 
 		@if (User.IsInRole("Student"))
 		{
-			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-dark ml-3">Update Grievance</a>
+			<a href="@Url.Action("Edit","Grievance",new { id= Model.GrievanceID}) " class="btn btn-primary	 ml-3">Update Grievance</a>
 			if (!String.IsNullOrEmpty(Model.reply.ReplyMessage))
 			{
 

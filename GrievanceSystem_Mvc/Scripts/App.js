@@ -468,8 +468,6 @@
 		}
 	);
 
-
-
 	var pgTable = $('#PendinggrievanceTable').DataTable(
 		{
 			"ajax":
@@ -531,7 +529,6 @@
 
 		}
 	);
-
 
 	var rgTable = $('#ResolvedgrievanceTable').DataTable(
 		{
@@ -719,9 +716,53 @@
 		$dialog.dialog('open');
 	}
 
-	$('#Image').on('change', function (event) {
 
-		$(this).next('.custom-file-label').html(event.target.files[0].name);
+	$('#file').on('change', function (event) {
+
+		var input = $(this);
+		var filename = input.val().split("\\").pop();
+		//var fn = event.target.files[0].name
+
+		$(this).next('.custom-file-label').html(filename);
+
+
+
+		var _err_mag = "";
+		var array = ['pdf', 'jpeg', 'jpg', 'PDF', 'JPEG', 'JPG'];
+		var flg = "0";
+		var Extension = input.val().substring(input.val().lastIndexOf('.') + 1).toLowerCase();
+
+
+		if (array.indexOf(Extension) <= -1) {
+
+			_err_mag += " File should be in .jpg, .jpeg, .pdf format only.";
+
+			flg = "1";
+		}
+
+		var imgsizee = event.target.files[0].size;
+		var sizekb = imgsizee / 1024;
+
+		if (Extension == 'pdf' || Extension == 'PDF') {
+			if (sizekb > 256) {
+
+				_err_mag += " File size should be less than 256 KB.";
+				flg = "1";
+			}
+		}
+		else {
+			if (sizekb < 15 || sizekb > 256) {
+
+				_err_mag += " File size between minimum 15 KB and maximum 256 KB.";
+
+				flg = "1";
+			}
+		}
+
+		if (flg == "1") {
+			alert(_err_mag);
+			$(this).next('.custom-file-label').html("Choose file");
+		}
 
 	});
 
@@ -734,4 +775,45 @@
 		$(this).parent().find("p.Reply").hide();
 
 	})
+
+	$('.replycontainer').on('click', 'a.FilePopup', function (e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		var title = $(this).attr('title');
+		ShowPDF(url, title);
+	});
+
+
+
+
+
+
+
+	function ShowPDF(fileNameP, elementTitle) {
+
+
+		$("#dialogNew").dialog({
+			modal: true,
+			title: elementTitle,
+			width: 1000,
+			height: 600,
+			buttons: {
+				//Close: function () {
+				//    $(this).dialog('close');
+				//}
+			},
+			open: function () {
+
+
+				var object = "<object data=\"{FileName}\" type=\"application/pdf\" width=\"100%\" height=\"100%\">";
+
+				object += "</object>";
+				object = object.replace(/{FileName}/g, "" + fileNameP);
+				$("#dialogNew").html(object);
+
+			}
+		});
+
+	}
+
 });

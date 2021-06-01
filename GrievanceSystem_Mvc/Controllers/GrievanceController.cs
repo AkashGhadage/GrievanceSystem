@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using GrievanceSystem_Mvc.ServiceLayer;
 using GrievanceSystem_Mvc.ViewModels;
+using System.IO;
+using GrievanceSystem_Mvc.Models;
 
 namespace GrievanceSystem_Mvc.Controllers
 {
@@ -127,6 +129,7 @@ namespace GrievanceSystem_Mvc.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult Create()
         {
+
             List<CategoryViewModel> categories = cs.GetCategory().ToList();
             ViewBag.categories = categories;
             return View();
@@ -134,10 +137,31 @@ namespace GrievanceSystem_Mvc.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Student")]
-        public ActionResult Create(NewGrievanceViewModel newGrievance)
+        public ActionResult Create(NewGrievanceViewModel newGrievance, HttpPostedFileBase file)
         {
-            newGrievance.User_ID = Convert.ToInt32(Session["CurrentUserID"]);
-            newGrievance.Status_ID = 1;
+
+            newGrievance.user_id = Convert.ToInt32(Session["CurrentUserID"]);
+            newGrievance.status_id = 1;
+
+            string uniqueFileName = null;
+
+            if (file != null)
+            {
+                //set the path to receive file 
+                string uploadPath = Server.MapPath(Helper.SetFilePath());
+
+
+                string fileName = Path.GetFileName(file.FileName);
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+                
+                string filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                file.SaveAs(filePath);
+            }
+
+
+
+            newGrievance.file = uniqueFileName;
 
             int rowAffected = gs.InsertGrievanceDetails(newGrievance);
             if (rowAffected == 0)

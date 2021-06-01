@@ -13,28 +13,31 @@ namespace GrievanceSystem_Mvc.ViewModels
     {
 
         [Required]
-        public string Subject { get; set; }
+        public string subject { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        [Display(Name = "Category")]
+        public string category { get; set; }
 
         [Required]
-        public string Subcategory { get; set; }
+        [Display(Name = "Subcategory")]
+        public string subcategory { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        [Display(Name = "Description")]
+        public string description { get; set; }
 
-        public string Image { get; set; }
+        public string file { get; set; }
 
         [Required(ErrorMessage = " * Field is required")]
-        public int Category_ID { get; set; }
+        public int category_id { get; set; }
 
         [Required(ErrorMessage = " * Field is required")]
-        public int Subcategory_ID { get; set; }
+        public int subcategory_id { get; set; }
 
-        public int Status_ID { get; set; }
+        public int status_id { get; set; }
 
-        public int User_ID { get; set; }
+        public int user_id { get; set; }
 
     }
 }

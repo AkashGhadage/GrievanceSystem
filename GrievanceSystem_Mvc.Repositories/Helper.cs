@@ -13,5 +13,7 @@ namespace GrievanceSystem_Mvc.Repositories
         {
             return ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         }
+
+      
     }
 }

@@ -13,14 +13,14 @@ namespace GrievanceSystem_Mvc.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GrievanceID { get; set; }
-        
+
         public DateTime ReportedDate { get; set; }
-        
+
         public string Subject { get; set; }
-        
+
         public string Description { get; set; }
-        
-        public string Image { get; set; }
+
+        public string File { get; set; }
 
         public int Category_ID { get; set; }
 

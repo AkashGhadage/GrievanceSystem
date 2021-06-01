@@ -20,7 +20,8 @@ namespace GrievanceSystem_Mvc.ViewModels
 
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        [Display(Name = "File")]
+        public string file { get; set; }
 
         public string Status { get; set; }
 

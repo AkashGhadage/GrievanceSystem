@@ -20,7 +20,7 @@ namespace GrievanceSystem_Mvc.Repositories
             var g = new DynamicParameters();
             g.Add("Subject", grievance.Subject);
             g.Add("Description", grievance.Description);
-            g.Add("Image", grievance.Image);
+            g.Add("File", grievance.File);
             g.Add("Category_ID", grievance.Category_ID);
             g.Add("Subcategory_ID", grievance.Subcategory_ID);
             g.Add("Status_ID", grievance.Status_ID);
