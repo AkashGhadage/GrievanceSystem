@@ -16,6 +16,7 @@ namespace GrievanceSystem_Mvc.ViewModels
 
 
         [Display(Name = "Reply")]
+        [Required (ErrorMessage ="Please enter remark before submit")]
         public string ReplyMessage { get; set; }
 
         public int Grievance_ID { get; set; }

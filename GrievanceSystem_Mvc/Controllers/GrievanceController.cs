@@ -18,13 +18,15 @@ namespace GrievanceSystem_Mvc.Controllers
         readonly ICategoryService cs;
         readonly ISubcategoryService ss;
         readonly IReplyService rs;
+        readonly IUserService us;
 
-        public GrievanceController(IGrievanceService gs, ICategoryService cs, ISubcategoryService ss, IReplyService rs)
+        public GrievanceController(IGrievanceService gs, ICategoryService cs, ISubcategoryService ss, IReplyService rs, IUserService us)
         {
             this.gs = gs;
             this.cs = cs;
             this.ss = ss;
             this.rs = rs;
+            this.us = us;
         }
 
         //based on user id we need to provide  grieviences and for admin/commitee member we need to provide complete list 
@@ -35,6 +37,7 @@ namespace GrievanceSystem_Mvc.Controllers
         {
 
             int userId = Convert.ToInt32(Session["CurrentUserID"]);
+
             List<GrievanceViewModel> grievanceViewModels = gs.GetGrievanceByUserId(userId);
             if (grievanceViewModels == null)
             {
@@ -139,8 +142,11 @@ namespace GrievanceSystem_Mvc.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult Create(NewGrievanceViewModel newGrievance, HttpPostedFileBase file)
         {
+            int userId = Convert.ToInt32(Session["CurrentUserID"]);
+            string userName = Session["CurrentUserName"].ToString();
+            string emailAddress = Session["CurrentUserEmail"].ToString();
 
-            newGrievance.user_id = Convert.ToInt32(Session["CurrentUserID"]);
+            newGrievance.user_id = userId;
             newGrievance.status_id = 1;
 
             string uniqueFileName = null;
@@ -153,13 +159,11 @@ namespace GrievanceSystem_Mvc.Controllers
 
                 string fileName = Path.GetFileName(file.FileName);
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
-                
+
                 string filePath = Path.Combine(uploadPath, uniqueFileName);
 
                 file.SaveAs(filePath);
             }
-
-
 
             newGrievance.file = uniqueFileName;
 
@@ -171,6 +175,13 @@ namespace GrievanceSystem_Mvc.Controllers
             }
             else
             {
+
+                //after data insertion Happen you can send email 
+
+                string emailBody = Helper.GenerateEmailBody(userName, emailAddress, newGrievance);
+
+                Helper.SendMail(emailAddress, emailBody);
+
                 return RedirectToAction("Index");
             }
         }
@@ -184,7 +195,7 @@ namespace GrievanceSystem_Mvc.Controllers
             List<CategoryViewModel> categories = GetCategories().ToList();
             ViewBag.categories = categories;
 
-            List<SubcategoryViewModel> subcategories = GetSubCat().ToList();
+            List<SubcategoryViewModel> subcategories = GetSubcategories().ToList();
             ViewBag.subcategories = subcategories;
 
             //here we need to get subcat aslo and we need to remove onchange event for dropbox for the instance :done
@@ -251,7 +262,7 @@ namespace GrievanceSystem_Mvc.Controllers
         }
 
 
-        public List<SubcategoryViewModel> GetSubCat()
+        public List<SubcategoryViewModel> GetSubcategories()
         {
             List<SubcategoryViewModel> subcategories = ss.GetSubcategory().ToList();
             return subcategories;
@@ -259,14 +270,14 @@ namespace GrievanceSystem_Mvc.Controllers
         }
 
 
-
-        public ActionResult GetSubcategories(int categoryId)
+        public JsonResult GetSubcategoriesByCategoryId(int categoryId)
         {
 
             List<SubcategoryViewModel> subcategories = ss.GetSubcategoryByCategoryId(categoryId).ToList();
 
             ViewBag.SubcatOptions = new SelectList(subcategories, "SubcategoryID", "SubcategoryName");
 
+            //create select list item object and convert it into json Obj 
             var subcategoriesData = subcategories.Select(m => new SelectListItem()
             {
                 Text = m.SubcategoryName.ToString(),
@@ -279,9 +290,6 @@ namespace GrievanceSystem_Mvc.Controllers
         public ActionResult GetReplyByGrievanceId(int grievanceId)
         {
             ReplyViewModel reply = rs.GetReplyByGrievanceId(grievanceId);
-
-
-
             return View();
         }
 

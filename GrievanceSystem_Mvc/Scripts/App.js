@@ -1,7 +1,13 @@
 ﻿$(document).ready(function () {
 
+
+	//use Icon hover Functionality
 	var elem = '<div><p mb-0>Welcome to<br/><b>Online Grievance Portal</b></p></div>' +
-		'<div class=""><a href="#login" class="btn btn-primary m-2">LOGIN</a> <br/>< a href = "#register" class="btn btn-warning  m-2" > REGISTER</a ></div > '
+		'<div class="">' +
+		'<a href="#login" class="btn btn-primary m-2">LOGIN</a> ' +
+		'< br />' +
+		' < a href="#register" class="btn btn-warning  m-2" > REGISTER</a >' +
+		'</div > '
 
 	$('[data-toggle="popover"]').popover({ animation: true, content: elem, html: true });
 
@@ -22,35 +28,32 @@
 		}
 	});
 
+	//Cascading dropdown list Functionality 
 	var ddc = $("#dd_Category");
 	var ddsc = $("#dd_Subcat");
 
 	ddc.change(function () {
-		var cId = $(this).val();
-		$.getJSON("/Grievance/GetSubcategories", { categoryId: cId },
-			function (classesData) {
-				var select = $("#ddState");
+		var categoryId = $(this).val();
+
+		$.ajax({
+			dataType: "json",
+			url: "/Grievance/GetSubcategoriesByCategoryId",
+			data: { categoryId: categoryId },
+			success: function (subcategories) {
 				ddsc.empty();
 				ddsc.append($('<option/>', {
 					value: 0,
-					text: "--Select Subcategory--"
+					text: "Select Subcategory"
 				}));
-				$.each(classesData, function (index, itemData) {
+				$.each(subcategories, function (index, subcategories) {
 					ddsc.append($('<option/>', {
-						value: itemData.Value,
-						text: itemData.Text
+						value: subcategories.Value,
+						text: subcategories.Text
 					}));
 				});
 			}
-		);
+		});
 	});
-
-
-
-
-
-
-
 
 	//Login validation part
 
@@ -62,8 +65,7 @@
 	var Email_Flag = false;
 	var Password_Flag = false;
 
-	//registration email checking 
-
+	//Email Checking While Registration
 	email_Element.blur(function (e) {
 		$.ajax({
 			type: "GET",
@@ -167,7 +169,7 @@
 
 
 
-	//toogle sidebar 
+	//toogle sidebar Icon 
 	$("#menu-toggle").click(function (e) {
 		e.preventDefault();
 		$("#wrapper").toggleClass("toggled");
@@ -440,7 +442,7 @@
 								return '<span class="badge badge-warning">' + data + '</span>'
 
 							} else {
-								return '<span class="badge badge-info">' + data + '</span>'
+								return '<span class="badge badge-info ">' + data + '</span>'
 
 							}
 
@@ -593,9 +595,7 @@
 	);
 
 
-
-
-
+	//Show subcategories based on category id using dropdown 
 
 	var dd_c = $("#ddc_Category");
 
@@ -604,8 +604,11 @@
 
 		scTable.ajax.url("/Subcategory/GetSubcategoriesByCategoryId/" + id).load();
 		scTable.draw();
+
 	});
 
+
+	// jquey modals
 
 	$('.tablecontainer').on('click', 'a.popup', function (e) {
 		e.preventDefault();
@@ -642,12 +645,6 @@
 		OpenPopup(url, title);
 	})
 
-	//$('.replycontainer').on('click', 'a.replypopup', function (e) {
-	//	e.preventDefault();
-	//	var url = $(this).attr('href');
-	//	var title = $(this).attr('title');
-	//	OpenPopup(url, title);
-	//})
 
 
 	function OpenPopup(pageUrl, elementTitle, tblref) {
@@ -717,17 +714,18 @@
 	}
 
 
+	//attach file name to custon bootstrap file input 
+	//validation for files
 	$('#file').on('change', function (event) {
 
 		var input = $(this);
 		var filename = input.val().split("\\").pop();
-		//var fn = event.target.files[0].name
 
 		$(this).next('.custom-file-label').html(filename);
 
 
 
-		var _err_mag = "";
+		var errmsg = "";
 		var array = ['pdf', 'jpeg', 'jpg', 'PDF', 'JPEG', 'JPG'];
 		var flg = "0";
 		var Extension = input.val().substring(input.val().lastIndexOf('.') + 1).toLowerCase();
@@ -735,8 +733,7 @@
 
 		if (array.indexOf(Extension) <= -1) {
 
-			_err_mag += " File should be in .jpg, .jpeg, .pdf format only.";
-
+			errmsg += " File should be in .jpg, .jpeg, .pdf format only.";
 			flg = "1";
 		}
 
@@ -746,36 +743,37 @@
 		if (Extension == 'pdf' || Extension == 'PDF') {
 			if (sizekb > 256) {
 
-				_err_mag += " File size should be less than 256 KB.";
+				errmsg += " File size should be less than 256 KB.";
 				flg = "1";
 			}
 		}
 		else {
 			if (sizekb < 15 || sizekb > 256) {
 
-				_err_mag += " File size between minimum 15 KB and maximum 256 KB.";
+				errmsg += " File size between minimum 15 KB and maximum 256 KB.";
 
 				flg = "1";
 			}
 		}
 
 		if (flg == "1") {
-			alert(_err_mag);
+			alert(errmsg);
 			$(this).next('.custom-file-label').html("Choose file");
 		}
 
 	});
 
 	//edit button functionality on grievance detail view
+
 	$('.replycontainer').on('click', 'a.replypopup', function (e) {
 		e.preventDefault();
 		$(this).parent().find("form.replyform").show();
-		//$("form.replyform").show();
 		$(this).hide();
 		$(this).parent().find("p.Reply").hide();
 
 	})
 
+	//onclick show pdf/img file using popup
 	$('.replycontainer').on('click', 'a.FilePopup', function (e) {
 		e.preventDefault();
 		var url = $(this).attr('href');
@@ -783,20 +781,14 @@
 		ShowPDF(url, title);
 	});
 
-
-
-
-
-
-
 	function ShowPDF(fileNameP, elementTitle) {
 
 
 		$("#dialogNew").dialog({
 			modal: true,
 			title: elementTitle,
-			width: 1000,
-			height: 600,
+			width: 700,
+			height: 500,
 			buttons: {
 				//Close: function () {
 				//    $(this).dialog('close');
@@ -806,8 +798,8 @@
 
 
 				var object = "<object data=\"{FileName}\" type=\"application/pdf\" width=\"100%\" height=\"100%\">";
-
 				object += "</object>";
+
 				object = object.replace(/{FileName}/g, "" + fileNameP);
 				$("#dialogNew").html(object);
 

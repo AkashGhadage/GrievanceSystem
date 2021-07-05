@@ -44,6 +44,7 @@ namespace GrievanceSystem_Mvc.Controllers
                     Session["CurrentUserID"] = user.UserId; //here we need to get last generated record no and for that we need to modify out sp
                     Session["CurrentUserName"] = user.FirstName + " " + user.LastName;
                     Session["CurrentUserRole"] = user.Role;
+                    Session["CurrentUserEmail"] = user.EmailAddress;
 
 
                     if (User.IsInRole("Student"))

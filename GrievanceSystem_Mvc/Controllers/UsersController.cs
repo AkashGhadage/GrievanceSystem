@@ -31,7 +31,7 @@ namespace GrievanceSystem_Mvc.Controllers
         [HttpGet]
         public ActionResult GetCellMember()
         {
-            List<UserViewModel> cellMembers = us.GetUsersByRoleId(4).ToList();
+            List<UserViewModel> cellMembers = us.GetUsersByRoleId(3).ToList();
             return Json(new { data = cellMembers }, JsonRequestBehavior.AllowGet);
 
         }
