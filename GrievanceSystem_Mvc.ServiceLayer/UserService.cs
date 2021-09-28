@@ -192,7 +192,7 @@ namespace GrievanceSystem_Mvc.ServiceLayer
 
         public string[] GetRolesForUser(string username)
         {
-
+            string[] roles = ur.GetRolesForUser(username);
             return ur.GetRolesForUser(username);
         }
     }

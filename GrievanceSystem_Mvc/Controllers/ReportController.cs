@@ -3,15 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GrievanceSystem_Mvc.ViewModels;
+using GrievanceSystem_Mvc.ServiceLayer;
+
 
 namespace GrievanceSystem_Mvc.Controllers
 {
     public class ReportController : Controller
     {
-        // GET: Report
+        readonly IReportService rs;
+      
+
+        public ReportController(IReportService rs)
+        {
+            this.rs = rs;
+        }
+
+
+
         public ActionResult Index()
         {
+
             return View();
+
+
+        }
+        // GET: Report
+        public ActionResult GetDetailedReport(DateTime? startDate, DateTime? endDate)
+        {
+
+            //here get data  that you want to show on UI 
+            //call this action method using ajax call and from there pass the dates
+
+           List<GrievanceViewModel>  grievances = rs.GetDetailedReport(startDate,endDate);
+
+            return Json(new { data = grievances }, JsonRequestBehavior.AllowGet);
+
+
         }
 
         // GET: Report/Details/5

@@ -5,7 +5,7 @@
 }
 
 body {
-	background: #F0EFEF;
+	background: #EEEEEE;
 }
 
 .Jumbo-bg {
@@ -123,6 +123,7 @@ body {
 .brand-logo {
 	height: 40px;
 }
+
 
 .btn-custom {
 	color: #212529;
@@ -266,7 +267,6 @@ body {
 
 
 /*sidebar*/
-
 #wrapper {
 	overflow-x: hidden;
 }
@@ -394,4 +394,3 @@ body {
 .hidden {
 	display: none;
 }
-

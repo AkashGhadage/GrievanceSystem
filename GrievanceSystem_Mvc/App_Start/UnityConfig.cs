@@ -22,6 +22,7 @@ namespace GrievanceSystem_Mvc
             container.RegisterType<IReplyService, ReplyService>();
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<ISubcategoryService, SubcategoryService>();
+            container.RegisterType<IReportService, ReportService>();
 
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
 

@@ -58,7 +58,7 @@
 	<script>
 
 		//heighlight the current active link
-		$('l.active').removeClass('active');
+		$('li.active').removeClass('active');
 		$('a[href="' + location.pathname + '"]').addClass('active');
 	</script>
 	@RenderSection("scripts", required: false)

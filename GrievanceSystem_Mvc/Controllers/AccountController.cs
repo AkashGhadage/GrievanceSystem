@@ -47,6 +47,11 @@ namespace GrievanceSystem_Mvc.Controllers
                     Session["CurrentUserEmail"] = user.EmailAddress;
 
 
+                    bool result = User.IsInRole("Student");
+                    string un = User.Identity.Name;
+                    bool au = User.Identity.IsAuthenticated;
+                    string at = User.Identity.AuthenticationType;
+
                     if (User.IsInRole("Student"))
                     {
                         return RedirectToAction("Index", "Grievance");
@@ -128,6 +133,11 @@ namespace GrievanceSystem_Mvc.Controllers
             int userId = Convert.ToInt32(Session["CurrentUserID"]);
             UserViewModel uvm = us.GetUserByUserID(userId);
 
+            if (uvm == null)
+            {
+                return View("Error");
+            }
+
             EditUserViewModel editUserViewModel = new EditUserViewModel()
             {
                 UserId = uvm.UserId,
@@ -150,12 +160,23 @@ namespace GrievanceSystem_Mvc.Controllers
             if (ModelState.IsValid)
             {
                 //here we need to cache username 
+                bool result = User.IsInRole("Student");
+                string un = User.Identity.Name;
+                bool au = User.Identity.IsAuthenticated;
+                string at = User.Identity.AuthenticationType;
 
                 editUserViewModel.UserId = Convert.ToInt32(Session["CurrentUserID"]);
                 int rowAffected = us.UpdateUserDetails(editUserViewModel);
                 Session["CurrentUserName"] = editUserViewModel.FirstName + " " + editUserViewModel.LastName;
-                //Session["CurrentUserEmail"] = editUserViewModel.EmailAddress; no use may be  idk
+                Session["CurrentUserEmail"] = editUserViewModel.EmailAddress;
+
+                result = User.IsInRole("Student");
+                un = User.Identity.Name;
+                au = User.Identity.IsAuthenticated;
+                at = User.Identity.AuthenticationType;
+
                 return View();
+
 
             }
             else

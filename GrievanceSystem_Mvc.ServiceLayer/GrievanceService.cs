@@ -79,7 +79,7 @@ namespace GrievanceSystem_Mvc.ServiceLayer
                     cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));
                     cfg.CreateMap<Category, CategoryViewModel>();
                     cfg.CreateMap<Subcategory, SubcategoryViewModel>();
-                    cfg.CreateMap<Reply, ReplyViewModel>();
+                    //cfg.CreateMap<Reply, ReplyViewModel>();
 
                     cfg.IgnoreUnmapped();
                 });
@@ -98,22 +98,6 @@ namespace GrievanceSystem_Mvc.ServiceLayer
             GrievanceViewModel grievanceViewModel = null;
             if (grievances != null)
             {
-                //var config = new MapperConfiguration(cfg => { cfg.CreateMap<Grievance, GrievanceViewModel>(); cfg.IgnoreUnmapped(); });
-                //var config = new MapperConfiguration(
-                //cfg =>
-                //{
-                //    //cfg.CreateMap<Grievance, GrievanceViewModel>();
-                //    cfg.CreateMap<Grievance, GrievanceViewModel>()
-                //    .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName))
-                //    .ForMember(d => d.Category, opt => opt.MapFrom(s => s.Category.CategoryName))
-                //    .ForMember(d => d.Subcategory, opt => opt.MapFrom(s => s.Subcategory.SubcategoryName))
-                //    .ForMember(d => d.ReplyMessage, opt => opt.MapFrom(s => s.Reply.ReplyMessage))
-                //    .ForMember(d => d.ReplyMessage, opt => opt.MapFrom(s => s.Reply.ReplyMessage))
-                //    .ForMember(d => d.ReplyDate, opt => opt.MapFrom(s => s.Reply.ReplyDate));
-                //    cfg.IgnoreUnmapped();
-                //}
-                //);
-
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Grievance, GrievanceViewModel>().ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.StatusName));

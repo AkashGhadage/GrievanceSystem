@@ -246,6 +246,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\BrandLogo.png" />
     <Content Include="Images\blue-highlight.png" />
     <Content Include="Images\google_PNG19635.png" />
@@ -404,8 +405,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Grievance\AllGrievances.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Shared\_UserPartial.cshtml" />
-    <Content Include="Views\Shared\_GrievancePartial.cshtml" />
     <Content Include="Views\Users\CellMember.cshtml" />
     <Content Include="Views\Users\CreateCellMember.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />

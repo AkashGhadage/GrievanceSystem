@@ -3,26 +3,94 @@
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container card my-4  container-height ">
 
+<div class="container card my-4 reportContainer">
 
 	<div class="row p-3">
 		<div class="col-md-12">
-			<span class="h5 pt-1"><strong>Reports</strong></span>
+			<span class="h5 pt-1"><strong>Grievance Report</strong></span>
 		</div>
 	</div>
-	<hr class="m-0" />
-	<div class="row">
-		<div class=" mt-1 col-md-12">
-			<p class="lead">Download reports</p>
 
-			<ul class="list-group">
-				<a href="#" class="list-group-item list-group-item-action"> <i class="fas fa-download fa-sm text-black-50"></i>&nbsp;Consolidate Grievance Report</a>
-				<a href="#" class="list-group-item list-group-item-action"> <i class="fas fa-download fa-sm text-black-50"></i>&nbsp;Detailed  Grievance Report</a>
-				<a href="#" class="list-group-item list-group-item-action">  <i class="fas fa-download fa-sm text-black-50"></i>&nbsp;Grievance Report Based On Action Taken</a>
-				<a href="#" class="list-group-item list-group-item-action">  <i class="fas fa-download fa-sm text-black-50"></i>&nbsp;Report Based On Pending Grievance </a>
-				<a href="#" class="list-group-item list-group-item-action "> <i class="fas fa-download fa-sm text-black-50"></i>&nbsp;Report Based On Closed Grievance</a>
-			</ul>
+	<div class="row ml-2 mb-2 ">
+
+		@*<div class="col-auto p-2">
+				<div class="input-group ">
+					<select class="form-select form-control" id="reportType">
+						<option selected="">Choose Type...</option>
+						<option value="1">Consolidate Grievance Report</option>
+						<option value="2">Detailed  Grievance Report</option>
+						<option value="3">Grievance Report Based On Action Taken</option>
+						<option value="4">Report Based On Pending Grievance</option>
+						<option value="5">Report Based On Closed Grievance</option>
+					</select>
+				</div>
+			</div>*@
+
+		<div class="col-auto p-2">
+			<div class="input-group">
+				<input type="date" id="startDate" class="form-control" placeholder="Select date" />
+			</div>
+		</div>
+
+		<div class="col-auto p-2">
+			<div class="input-group">
+				<input type="date" id="endDate" class="form-control" placeholder="Select date" />
+
+			</div>
+		</div>
+		<div class="col-auto p-2">
+			<button class="btn btn-outline-warning btnGenerateReport " style="line-height: 22px;">Generate Report</button>
+		</div>
+	</div>
+
+	<hr class="m-0" />
+	<div class="row justify-content-center p-3 ">
+		<div class="col-md-12 hidden" id="table-wrapper">
+			<table class="table table-striped table-bordered table-responsive" id="reportTable">
+				<thead>
+					<tr>
+						@*<th>
+								Sr.No
+							</th>*@
+						<th>
+							G.Id
+						</th>
+						<th>
+							Grievant Name
+						</th>
+						<th>
+							Subject
+						</th>
+						<th>
+							Description
+						</th>
+
+						<th>
+							Category
+						</th>
+						<th>
+							Subcategory
+						</th>
+						<th>
+							Reported Date
+						</th>
+						<th>
+							Action Taken/Remark
+						</th>
+						<th>
+							Reply By
+						</th>
+						<th>
+							Reply Date
+						</th>
+						<th>
+							Status
+						</th>
+
+					</tr>
+				</thead>
+			</table>
 		</div>
 	</div>
 </div>

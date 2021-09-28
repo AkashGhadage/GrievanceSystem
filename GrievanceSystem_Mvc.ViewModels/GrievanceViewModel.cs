@@ -30,5 +30,10 @@ namespace GrievanceSystem_Mvc.ViewModels
         public SubcategoryViewModel subcategory { get; set; }
 
         public ReplyViewModel reply { get; set; }
+
+        public User Guser { get; set; }
+
+        public User Ruser { get; set; }
+
     }
 }

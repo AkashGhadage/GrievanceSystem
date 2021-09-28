@@ -38,5 +38,9 @@ namespace GrievanceSystem_Mvc.DomainModels
 
         public virtual Reply Reply { get; set; }
 
+        public virtual User Guser { get; set; }
+        public virtual User Ruser { get; set; }
+
+
     }
 }

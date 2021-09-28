@@ -402,6 +402,7 @@
 	var gTable = $('#grievanceTable').DataTable(
 		{
 
+
 			"ajax":
 			{
 				"url": "/Grievance/GetAllGrievances",
@@ -466,6 +467,7 @@
 				"emptyTable": "No data found"
 
 			}
+
 
 		}
 	);
@@ -646,7 +648,7 @@
 	})
 
 
-
+	//poppup
 	function OpenPopup(pageUrl, elementTitle, tblref) {
 
 		var $pageContent = $('<div />');
@@ -716,6 +718,7 @@
 
 	//attach file name to custon bootstrap file input 
 	//validation for files
+
 	$('#file').on('change', function (event) {
 
 		var input = $(this);
@@ -781,6 +784,7 @@
 		ShowPDF(url, title);
 	});
 
+	//functionality to show pdf
 	function ShowPDF(fileNameP, elementTitle) {
 
 
@@ -808,4 +812,191 @@
 
 	}
 
+
+	//report functionality 
+
+	var startDate = $('#startDate').val();
+	var endDate = $('#endDate').val();
+
+	var rpTable = $("#reportTable").DataTable(
+		{
+			dom: 'Bfrtip',
+			buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+			autoWidth: false,
+			ajax:
+			{
+				url: "/Report/GetDetailedReport?startDate=" + startDate + "&endDate=" + endDate,
+				type: "GET",
+				dataType: "json",
+				data: {
+					startDate: "startDate",
+					endDate: "endDate"
+				},
+			},
+			columns:
+				[
+					//{
+					//	"data": "Sr.No",
+					//	"render": function (data, type, row, meta) {
+					//		return meta.row + meta.settings._iDisplayStart + 1;
+					//	}
+					//},
+
+					{
+						data: "GrievanceID"
+					},
+					{
+						data: "Guser",
+						render: function (user) {
+							if (user != null) {
+
+								var name = user.FirstName + " " + user.LastName;
+								return name;
+							}
+							else {
+								return "N/A"
+							}
+							
+						}
+
+					},
+					{
+						data: "Subject",
+						sortable: false
+					},
+					{
+						data: "Description",
+						sortable: false
+
+					},
+					{
+						data: "category",
+						sortable: false,
+						render: function (data) {
+
+							return data.CategoryName;
+						}
+					},
+					{
+						data: "subcategory",
+						sortable: false,
+						render: function (data) {
+
+							return data.SubcategoryName;
+						}
+					},
+					{
+						data: "ReportedDate",
+						render: function (jsonDate) {
+							if (jsonDate == "/Date(-62135596800000)/") {
+								return "N/A";
+							}
+							else {
+								var date = new Date(parseInt(jsonDate.substr(6)));
+								var month = date.getMonth() + 1;
+								return date.getDate() + "/" + month + "/" + date.getFullYear();
+							}
+
+						}
+					},
+					{
+						data: "reply",
+						render: function (data) {
+							if (data == null) {
+								return "N/A";
+							}
+							else {
+								return data.ReplyMessage;
+							}
+
+						}
+					},
+					{
+						data: "Ruser",
+						render: function (user) {
+							if (user != null) {
+								var name = user.FirstName + " " + user.LastName;
+								return name;
+							}
+							else {
+								return "N/A"
+							}
+
+						}
+
+					},
+					{
+						data: "reply",
+						render: function (data) {
+							if (data != null) {
+								var jsonDate = data.ReplyDate;
+								if (jsonDate == "/Date(-62135596800000)/") {
+									return "N/A";
+								}
+								else {
+									var date = new Date(parseInt(jsonDate.substr(6)));
+									var month = date.getMonth() + 1;
+									return date.getDate() + "/" + month + "/" + date.getFullYear();
+								}
+							}
+							else {
+								return "N/A";
+							}
+
+
+						}
+
+					},
+					{
+						data: "Status",
+						searchable: false,
+						sortable: true,
+
+					}
+
+
+				],
+			language:
+			{
+				"emptyTable": "No data found"
+
+			}
+
+		}
+	);
+
+
+	//form ui we get report type and dates
+	$(".reportContainer").on('click', 'button.btnGenerateReport', function () {
+		startDate = $('#startDate').val();
+		endDate = $('#endDate').val();
+
+		if (startDate == "" && endDate == "") {
+			$.notify("please select Date First",
+				{
+					// position defines the notification position though uses the defaults below
+					globalPosition: 'top center',
+					className: 'error',
+					autoHideDelay: 3000,
+				}
+
+			);
+		}
+		else {
+			rpTable.ajax.url("/Report/GetDetailedReport?startDate=" + startDate + "&endDate=" + endDate).load();
+			rpTable.draw();
+			$("#table-wrapper").show();
+		}
+
+	});
+
+
+
+
+
+
+
+
+
 });
+
